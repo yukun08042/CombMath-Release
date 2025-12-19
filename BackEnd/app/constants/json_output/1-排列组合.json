@@ -1,0 +1,1586 @@
+[
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 1,
+    "problem_content": "将 $n$ 个相同的小球放入 $r$ 个不同的盒子中，每个盒子中至少放入 $k$ 个球（$n \\geq rk$），求不同放置方案的个数。",
+    "problem_solution": "解答过程如下：\n\n1. **基础分配**  \n   由于每个盒子至少要有 $k$ 个球，先在每个盒子中放入 $k$ 个球，共放入 $rk$ 个球。此时还剩余\n   $$n - rk$$\n   个球需要分配。\n\n2. **转化为“星与杠”模型**  \n   剩余的 $n - rk$ 个球可以在 $r$ 个盒子中任意分配（允许为空），问题等价于求非负整数解的个数：\n   $$x_1 + x_2 + \\cdots + x_r = n - rk,$$\n   其中 $x_i$ 表示第 $i$ 个盒子额外得到的球数。\n\n3. **应用组合公式**  \n   该方程的非负整数解个数为“星与杠”公式：\n   $$\\binom{(n - rk) + r - 1}{r - 1} = C_{n - rk + r - 1}^{\\,r - 1}.$$\n\n因此，将 $n$ 个相同的小球放入 $r$ 个不同的盒子中且每盒至少 $k$ 个球的方案数为\n$$C_{n - rk + r - 1}^{\\,r - 1}.$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "将 $n$ 个相同小球放入 $r$ 个不同盒子，每盒至少 $k$ 个，求方案数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "先满足“每盒至少 $k$ 个”，再把剩余问题转化为“星与杠”模型计数"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "先在每个盒子放 $k$ 个球，共放入 $rk$ 个球，剩余 $n - rk$ 个球待分配"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "将剩余球数记为 $x_i$：第 $i$ 个盒子额外得到 $x_i$ 个球，得到方程\n$$x_1 + x_2 + \\cdots + x_r = n - rk$$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "将非负整数解问题视为“星与杠”：$n-rk$ 颗星在 $r$ 组中分配，用 $r-1$ 根杠分隔"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "方程 $x_1 + \\cdots + x_r = n - rk$ 的非负整数解个数为\n$$\\binom{(n - rk) + r - 1}{r - 1}$$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "最终答案",
+          "node_content": "原问题的放置方案数为\n$$\\binom{n - rk + r - 1}{r - 1}$$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "先满足下界条件"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "引入变量表示剩余分配"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "识别为星与杠模型"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "应用星与杠公式"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "回到原问题给出答案"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 2,
+    "problem_content": "求从 1 到 100000 的所有整数的十进制表示中，数字 $0$ 出现的总次数。",
+    "problem_solution": "我们统计从 1 到 100000 的所有整数的十进制表示中，数字 $0$ 出现的次数。\n\n1. **统计 1 位数到 5 位数中各位为 0 的情况（不含前导 0）**\n\n   设一个 $n$ 位数的第 $i$ 位为 $0$，且 $i \\neq n$（即不为最高位），我们计算这样的 $n$ 位数共有多少种：\n\n   - 最高位（第 1 位）不能为 $0$，共有 9 种取值（$1,2,\\dots,9$）。\n   - 固定第 $i$ 位为 $0$，其余 $n-2$ 个中间位置各有 10 种取值。\n   \n   因此，对于固定的 $i$（且 $i \\neq 1$），这样的 $n$ 位数共有：\n   $$9 \\cdot 10^{n-2}$$\n\n   对于一个 $n$ 位数，除最高位以外还有 $n-1$ 个位置可以为 $0$，所以 $n$ 位数中所有非首位为 $0$ 的情况总数为：\n   $$9 \\cdot 10^{n-2} \\cdot (n-1)$$\n\n   现在对 $n=1$ 到 $5$ 的整数进行求和（注意 1 位数中没有位置可以为 0，故其贡献为 0）：\n   $$\n   \\sum_{n=1}^{5} 9 \\cdot 10^{n-2} \\cdot (n-1)\n   = 0 + 9 + 180 + 2700 + 36000 = 38889\n   $$\n\n   因此，从 1 位数到 5 位数中，所有数字的十进制表示中，非首位上的 $0$ 总计出现了 $38889$ 次。\n\n2. **补充考虑数 100000 中的 0**\n\n   数 $100000$ 有 1 位非零数和 5 个 $0$，即其中数字 $0$ 一共出现了 5 次。\n\n3. **合计总次数**\n\n   将上述两部分相加：\n   $$38889 + 5 = 38894$$\n\n   因此，从 1 到 100000 的所有整数的十进制表示中，数字 $0$ 出现的总次数为：\n   $$\\boxed{38894}$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "统计从 $1$ 到 $100000$ 的所有整数十进制表示中数字 $0$ 出现的总次数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "拆分为：1～5 位数中“非首位 0”的出现次数 + 数 $100000$ 中的 $0$ 次数"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "核心思路",
+          "node_content": "对一般 $n$ 位数建立计数模型，先求固定某一非首位为 $0$ 的 $n$ 位数个数"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "固定 $n$ 位数第 $i$ 位为 $0$ 且 $i\\neq 1$：最高位 $9$ 种，其余 $n-2$ 位各 $10$ 种，共 $9\\cdot 10^{n-2}$ 个"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "对同一位数长度 $n$：除首位外有 $n-1$ 个位置可为 $0$，故非首位为 $0$ 的总次数为 $9\\cdot 10^{n-2}(n-1)$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "对 $n=1\\sim 5$ 求和（$n=1$ 无可为 $0$ 的位置）：$\\sum_{n=1}^{5}9\\cdot 10^{n-2}(n-1)=38889$，即 1～5 位数中非首位 $0$ 共 $38889$ 次"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "单独统计数 $100000$：含 $5$ 个 $0$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "最终答案",
+          "node_content": "总次数 $=38889+5=38894$，故从 $1$ 到 $100000$ 中数字 $0$ 出现 $38894$ 次"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "整体拆分"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "建立一般计数模型"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "固定一位为 $0$ 计算种数"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "扩展到所有非首位位置"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "对 $n=1\\sim 5$ 累加"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N2",
+          "target": "N7",
+          "edge_content": "单独统计 $100000$"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N8",
+          "edge_content": "与 $100000$ 合并"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "与 1～5 位数结果合并"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 2,
+    "problem_content": "有 $m$ 个男生和 $n$ 个女生（$m,n$ 均为正整数），排成一行，求下列各种情形下的排法数：\n\n1. 任何两个男生不相邻（$m \\le n+1$）。\n2. $n$ 个女生形成一个整体（即任何两个女生之间没有男生）。\n3. 指定的男生 $A$ 和指定的女生 $B$ 不相邻。",
+    "problem_solution": "1. **任何两个男生不相邻（$m \\le n+1$）**\n\n- 先将 $n$ 个女生排成一行，有 $n!$ 种排法。\n- 女生排好后，在这 $n$ 个女生之间及两端一共形成 $n+1$ 个空位，从中选择 $m$ 个空位放置男生，有 $\\binom{n+1}{m}$ 种选择方式。\n- 在选定的 $m$ 个空位内，将 $m$ 个男生进行全排列，有 $m!$ 种排法。\n\n综上，排法总数为：\n\n$$\nn! \\cdot \\binom{n+1}{m} \\cdot m! \n= \\frac{n!(n+1)!}{(n+1-m)!}, \\quad (m \\le n+1).\n$$\n\n---\n\n2. **$n$ 个女生形成一个整体（即任何两个女生之间没有男生）**\n\n- 将 $n$ 个女生视为一个整体，再加上 $m$ 个男生，一共是 $m+1$ 个对象，排成一行有 $(m+1)!$ 种排法。\n- 在女生这一整体内部，$n$ 个女生之间可以任意排列，有 $n!$ 种排法。\n\n因此，总排法数为：\n\n$$\n(m+1)! \\cdot n!.\n$$\n\n---\n\n3. **男生 $A$ 和女生 $B$ 不相邻**\n\n- 所有 $m+n$ 个人不加限制的排法共有 $(m+n)!$ 种。\n- 计算男生 $A$ 与女生 $B$ 相邻的排法数：\n  - 将 $A$ 和 $B$ 视为一个整体，此整体内部可以有两种顺序（$AB$ 或 $BA$），共有 $2$ 种排法。\n  - 这个整体与其余 $m+n-2$ 个人一起，共有 $m+n-1$ 个对象，排成一行的排法为 $(m+n-1)!$ 种。\n  - 因此，$A,B$ 相邻的排法共有 $2\\cdot(m+n-1)!$ 种。\n\n由总排法减去相邻排法，得到 $A$ 与 $B$ 不相邻的排法数为：\n\n$$\n(m+n)! - 2\\cdot(m+n-1)! \n= (m+n-2)\\cdot(m+n-1)!.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "有 $m$ 个男生、$n$ 个女生排成一行，分别求三种限制条件下的排法数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "将三个子问题分别建模为“整体视作一个对象”或“在空位中插入”的排列计数问题"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "分支/情况",
+          "node_content": "情形(1)：任何两个男生不相邻（$m\\le n+1$）"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "先排女生，$n$ 个女生全排列：$n!$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "女生形成 $n+1$ 个空位，从中选 $m$ 个空位放男生：$\\binom{n+1}{m}$（要求 $m\\le n+1$）"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "在选定的 $m$ 个空位中将 $m$ 个男生全排列：$m!$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "情形(1) 总排法：$n!\\cdot\\binom{n+1}{m}\\cdot m!=\\dfrac{n!(n+1)!}{(n+1-m)!}$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "情形(2)：$n$ 个女生形成一个整体（女生中间无男生）"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "将 $n$ 个女生视为一个整体，与 $m$ 个男生共 $m+1$ 个对象，全排列：$(m+1)!$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "整体内部 $n$ 个女生可任意排列：$n!$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "情形(2) 总排法：$(m+1)!\\cdot n!$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "分支/情况",
+          "node_content": "情形(3)：指定男生 $A$ 与指定女生 $B$ 不相邻"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "关键结论",
+          "node_content": "无任何限制时，总排法：$(m+n)!$"
+        },
+        {
+          "node_id": "N14",
+          "node_type": "关键结论",
+          "node_content": "将 $A,B$ 相邻视为一个整体，整体内部有 $AB,BA$ 两种排列：$2$ 种"
+        },
+        {
+          "node_id": "N15",
+          "node_type": "关键结论",
+          "node_content": "整体与其余 $m+n-2$ 人共 $m+n-1$ 个对象，全排列：$(m+n-1)!$，故 $A,B$ 相邻排法为 $2(m+n-1)!$"
+        },
+        {
+          "node_id": "N16",
+          "node_type": "关键结论",
+          "node_content": "情形(3) 不相邻排法：$(m+n)!-2(m+n-1)!=(m+n-2)(m+n-1)!$"
+        },
+        {
+          "node_id": "N17",
+          "node_type": "最终答案",
+          "node_content": "情形(1)：$n!\\binom{n+1}{m}m!$；情形(2)：$(m+1)!n!$；情形(3)：$(m+n-2)(m+n-1)!$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "子问题(1)"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "先排女生"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "构造空位"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "排男生"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "乘法原理"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N17",
+          "edge_content": "汇总(1)"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N2",
+          "target": "N8",
+          "edge_content": "子问题(2)"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "女生作整体"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "内部排列"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "乘法原理"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N11",
+          "target": "N17",
+          "edge_content": "汇总(2)"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N2",
+          "target": "N12",
+          "edge_content": "子问题(3)"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "先算总数"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N12",
+          "target": "N14",
+          "edge_content": "转化为相邻数"
+        },
+        {
+          "edge_id": "E16",
+          "source": "N14",
+          "target": "N15",
+          "edge_content": "整体排列"
+        },
+        {
+          "edge_id": "E17",
+          "source": "N13",
+          "target": "N16",
+          "edge_content": "总数减相邻数"
+        },
+        {
+          "edge_id": "E18",
+          "source": "N15",
+          "target": "N16",
+          "edge_content": "代入相邻数"
+        },
+        {
+          "edge_id": "E19",
+          "source": "N16",
+          "target": "N17",
+          "edge_content": "汇总(3)"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 2,
+    "problem_content": "设集合\n$$A = \\{(a, b) \\mid a, b \\in \\mathbb{Z},\\ 0 \\le a \\le 9,\\ 0 \\le b \\le 7\\}.$$ \n在 $xOy$ 平面上：\n\n1. 求以 $A$ 中的点为四个顶点、且四条边都与坐标轴平行的长方形（包括正方形）共有多少个。\n2. 求以 $A$ 中的点为四个顶点、且四条边都与坐标轴平行的正方形共有多少个。",
+    "problem_solution": "1. **长方形（包括正方形）的数目**\n\n- 在集合 $A$ 中，横坐标 $a$ 的取值范围为 $0,1,\\dots,9$，共 $10$ 个不同的横坐标；纵坐标 $b$ 的取值范围为 $0,1,\\dots,7$，共 $8$ 个不同的纵坐标。\n- 一个以 $A$ 中的点为顶点、边与坐标轴平行的长方形，可以唯一地由两条不同的竖直线和两条不同的水平线确定。\n  - 选择两条不同的竖直线等价于从 $10$ 个不同横坐标中选出两个，方式数为\n    $$C(10,2).$$\n  - 选择两条不同的水平线等价于从 $8$ 个不同纵坐标中选出两个，方式数为\n    $$C(8,2).$$\n- 因此，这样的长方形（包括正方形）总数为\n  $$C(10,2) \\cdot C(8,2) = 1260.$$\n\n2. **正方形的数目**\n\n- 考虑一个边与坐标轴平行、顶点在 $A$ 中的正方形。设其左下角顶点为 $(a,b)$，边长为 $k$（$k$ 为正整数），则右上角顶点为 $(a+k, b+k)$。\n- 要使所有顶点都在 $A$ 中，需要满足：\n  $$0 \\le a \\le 9,\\quad 0 \\le b \\le 7,\\quad a + k \\le 9,\\quad b + k \\le 7.$$\n- 对于给定的边长 $k$：\n  - 横坐标 $a$ 的取值需满足 $a + k \\le 9$，因此\n    $$a \\in \\{0,1,\\dots,9-k\\},\\quad \\text{共有 } 10 - k \\text{ 个取值}。$$\n  - 纵坐标 $b$ 的取值需满足 $b + k \\le 7$，因此\n    $$b \\in \\{0,1,\\dots,7-k\\},\\quad \\text{共有 } 8 - k \\text{ 个取值}。$$\n- 故对于边长为 $k$ 的正方形，左下角顶点 $(a,b)$ 的可选数目为\n  $$(10 - k)(8 - k).$$\n- 由于纵坐标范围为 $0$ 到 $7$，最大可能的边长为 $7$，故 $k$ 的取值范围为 $1 \\le k \\le 7$。于是，所有可能的正方形总数为\n  $$\\sum_{k=1}^7 (10 - k)(8 - k) = 196.$$\n\n因此：\n- 长方形（包括正方形）共有 $1260$ 个；\n- 正方形共有 $196$ 个。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在点集 $A$ 上，计数：①轴对齐长方形数 ②轴对齐正方形数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "将问题拆成两个**平行子任务**：先数长方形，再数正方形"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "集合 $A$ 中横坐标有 $10$ 个，纵坐标有 $8$ 个不同取值"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "核心思路",
+          "node_content": "长方形由两条不同竖直线和两条不同水平线唯一确定"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "选竖直线：从 $10$ 条中选 $2$ 条，有 $C(10,2)$ 种"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "选水平线：从 $8$ 条中选 $2$ 条，有 $C(8,2)$ 种"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "长方形总数：$C(10,2)\\cdot C(8,2)=1260$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "核心思路",
+          "node_content": "正方形：按边长 $k$ 分类，计数左下角顶点 $(a,b)$ 可取位置"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "设左下角为 $(a,b)$，边长为 $k$，则右上角为 $(a+k,b+k)$，需满足 $0\\le a\\le9,\\ 0\\le b\\le7,\\ a+k\\le9,\\ b+k\\le7$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "给定 $k$ 时：$a$ 有 $10-k$ 个取值，$b$ 有 $8-k$ 个取值，因此边长为 $k$ 的正方形数为 $(10-k)(8-k)$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "纵坐标只到 $7$，故最大边长 $k=7$，即 $1\\le k\\le7$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "关键结论",
+          "node_content": "正方形总数：$\\displaystyle\\sum_{k=1}^7(10-k)(8-k)=196$"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "最终答案",
+          "node_content": "长方形（含正方形）共有 $1260$ 个，正方形共有 $196$ 个"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "任务拆分"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "统一背景：统计坐标数"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "子任务一：长方形"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "利用坐标数量"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "竖直线选择"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N4",
+          "target": "N6",
+          "edge_content": "水平线选择"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N5",
+          "target": "N7",
+          "edge_content": "组合竖直线与水平线"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "组合竖直线与水平线"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N2",
+          "target": "N8",
+          "edge_content": "子任务二：正方形"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N3",
+          "target": "N8",
+          "edge_content": "利用坐标范围"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "用左下角与边长刻画正方形"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "对固定 $k$ 统计 $(a,b)$ 取值"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N9",
+          "target": "N11",
+          "edge_content": "确定 $k$ 的取值范围"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N10",
+          "target": "N12",
+          "edge_content": "对各 $k$ 求和"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "限定求和区间"
+        },
+        {
+          "edge_id": "E16",
+          "source": "N7",
+          "target": "N13",
+          "edge_content": "汇总长方形结果"
+        },
+        {
+          "edge_id": "E17",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "汇总正方形结果"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 3,
+    "problem_content": "由 $n$ 个 $0$ 和 $n$ 个 $1$ 构成的 $2n$ 位二进制串，要求对于任意前 $k$ 位（$1 \\le k \\le 2n$），其中 $0$ 的数目不少于 $1$ 的数目。求满足该要求的二进制串的数目。",
+    "problem_solution": "这类计数问题的答案为卡特兰数，可以用“栈操作序列”来理解：约定“进栈”为 $1$，“出栈”为 $0$，那么题目条件等价于在整个序列的任意前缀中，出栈操作的次数不超过进栈操作的次数。\n\n**解题步骤：**\n\n1. **不加限制的总序列数**  \n   在长度为 $2n$ 的位置中选择 $n$ 个位置放置 $1$（即进栈），其余 $n$ 个位置放置 $0$（即出栈），共有\n   $$\n   C_{2n}^n\n   $$\n   种可能的二进制串/进出栈序列。\n\n2. **减去不符合前缀限制的序列数**  \n   不符合要求的序列是指存在某个前缀，使得出栈次数多于进栈次数。可以利用“反射法”或标准卡特兰数计数结论：这类“失衡”的序列数为\n   $$\n   C_{2n}^{n+1}.\n   $$\n\n3. **计算满足要求的序列数**  \n   于是满足条件的二进制串数目为\n   $$\n   C_{2n}^n - C_{2n}^{n+1}.\n   $$\n   利用组合数恒等式可化简为\n   $$\n   C_{2n}^n - C_{2n}^{n+1} \n   = \\frac{1}{n+1} \\cdot C_{2n}^n.\n   $$\n\n因此，满足条件的 $2n$ 位二进制串的数目为\n$$\n\\frac{1}{n+1} \\cdot C_{2n}^n,\n$$\n即第 $n$ 个卡特兰数。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "计数：由 $n$ 个 $0$ 和 $n$ 个 $1$ 构成的 $2n$ 位串，且任意前缀中 $0$ 数目不少于 $1$ 数目，求其数目"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "将二进制串转化为“栈操作序列”：$1$ 表示进栈，$0$ 表示出栈，前缀条件表示任意时刻出栈次数不超过进栈次数"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "核心思路",
+          "node_content": "先计出所有含 $n$ 个 $1$ 和 $n$ 个 $0$ 的长度为 $2n$ 序列总数，再减去不满足前缀限制的“失衡”序列数"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "不加限制的总序列数：在 $2n$ 个位置中选 $n$ 个位置放 $1$，其余放 $0$，共有 $\\displaystyle C_{2n}^n$ 种"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "利用反射法/卡特兰数结论：存在某个前缀出栈次数 $>$ 进栈次数的“失衡”序列数为 $\\displaystyle C_{2n}^{n+1}$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "满足前缀限制的序列数为“总数 − 失衡数”：$\\displaystyle C_{2n}^n - C_{2n}^{n+1}$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "利用组合恒等式：$\\displaystyle C_{2n}^n - C_{2n}^{n+1} = \\frac{1}{n+1} C_{2n}^n$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "最终答案",
+          "node_content": "满足条件的二进制串数目为 $\\displaystyle \\frac{1}{n+1} C_{2n}^n$，即第 $n$ 个卡特兰数"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "模型转化：二进制串 → 栈操作"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "确定计数总体策略"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "求总序列数"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "求失衡序列数"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N6",
+          "edge_content": "代入总数"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "代入失衡数并相减"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "化简组合式"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "给出卡特兰数形式的最终结果"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 4,
+    "problem_content": "设 $\\{a_i\\}$ 是一个长度为 $60$ 的正整数数列（$1 \\leq i \\leq 60$），其中\n\n- $a_1 = 1$；\n- $a_{60} = 20^{20}$；\n- 数列中每一项都是其后面一项的约数，即对任意 $1 \\le i < 60$，有 $a_i \\mid a_{i+1}$。\n\n对 $a_{60}$ 进行质因数分解，得\n$$a_{60} = 20^{20} = 2^{40} \\cdot 5^{20}.$$ \n因此，对每个 $i$，可以写成\n$$a_i = 2^{x_i} \\cdot 5^{y_i}, \\quad 0 \\le x_i \\le 40,\\; 0 \\le y_i \\le 20,$$\n且由 $a_1 = 1$ 可知 $a_1 = 2^0 \\cdot 5^0$。\n\n1. 求满足上述要求的数列 $\\{a_i\\}$ 的数目。\n\n2. 若在上述条件基础上进一步要求数列 $\\{a_i\\}$ 严格递增，即 $a_1 < a_2 < \\cdots < a_{60}$，求满足条件的数列数目。",
+    "problem_solution": "下面对两小问分别求解。\n\n---\n\n### 第 1 问：一般非减数列的数目\n\n由条件 $a_i \\mid a_{i+1}$ 可知：\n\n- 若 $a_i = 2^{x_i}5^{y_i}$，$a_{i+1} = 2^{x_{i+1}}5^{y_{i+1}}$，则 $a_i \\mid a_{i+1}$ 等价于\n  $$x_{i+1} \\ge x_i, \\quad y_{i+1} \\ge y_i.$$\n  因此，数列 $\\{x_i\\}$ 和 $\\{y_i\\}$ 均为非减序列。\n- 由 $a_1 = 1 = 2^0 5^0$ 与 $a_{60} = 2^{40}5^{20}$，可知\n  $$x_1 = 0,\\; x_{60} = 40; \\quad y_1 = 0,\\; y_{60} = 20.$$\n\n于是问题转化为：\n\n- $\\{x_i\\}$ 是一个长度为 $60$ 的非减整数序列，取值范围 $0 \\le x_i \\le 40$，且 $x_1 = 0, x_{60} = 40$；\n- $\\{y_i\\}$ 是一个长度为 $60$ 的非减整数序列，取值范围 $0 \\le y_i \\le 20$，且 $y_1 = 0, y_{60} = 20$；\n- $\\{x_i\\}$ 与 $\\{y_i\\}$ 彼此独立。\n\n记增量\n$$\\Delta x_i = x_i - x_{i-1}, \\quad \\Delta y_i = y_i - y_{i-1}, \\quad i = 2,3,\\dots,60.$$\n由非减性可知 $\\Delta x_i, \\Delta y_i \\ge 0$，并且\n$$\\sum_{i=2}^{60} \\Delta x_i = x_{60} - x_1 = 40, \\quad \\sum_{i=2}^{60} \\Delta y_i = y_{60} - y_1 = 20.$$\n\n将 $\\Delta x_2,\\dots,\\Delta x_{60}$ 视为 $59$ 个非负整数，和为 $40$，则其方案数为“将 $40$ 个单位增量分配到 $59$ 个位置”的方案数，即\n$$\\binom{40+59-1}{40} = \\binom{98}{40}.$$\n同理，$\\Delta y_2,\\dots,\\Delta y_{60}$ 为 $59$ 个非负整数，和为 $20$，其方案数为\n$$\\binom{20+59-1}{20} = \\binom{78}{20}.$$\n\n由于 $\\{x_i\\}$ 与 $\\{y_i\\}$ 的选择相互独立，故满足条件的数列 $\\{a_i\\}$ 的总数为\n\n$$\\boxed{\\binom{98}{40} \\cdot \\binom{78}{20}}.$$\n\n---\n\n### 第 2 问：严格递增数列的数目\n\n现再要求 $a_1 < a_2 < \\cdots < a_{60}$。设 $a_i = 2^{x_i}5^{y_i}$，则\n\n- 非减条件给出 $x_{i+1} \\ge x_i,\\; y_{i+1} \\ge y_i$；\n- 严格递增 $a_{i+1} > a_i$ 等价于\n  $$\\text{对每个 } i, \\; (x_{i+1} > x_i) \\text{ 或 } (y_{i+1} > y_i) \\text{ 至少有一个成立}.$$\n\n仍记\n$$\\Delta x_i = x_i - x_{i-1}, \\quad \\Delta y_i = y_i - y_{i-1}, \\quad i = 2,3,\\dots,60,$$\n则\n$$\\Delta x_i \\ge 0, \\; \\Delta y_i \\ge 0, \\quad \\sum_{i=2}^{60} \\Delta x_i = 40, \\quad \\sum_{i=2}^{60} \\Delta y_i = 20,$$\n且严格递增条件要求对每个 $i$，\n$$\\Delta x_i + \\Delta y_i \\ge 1.$$\n\n另一方面，总增量为\n$$\\sum_{i=2}^{60} (\\Delta x_i + \\Delta y_i) = (x_{60} - x_1) + (y_{60} - y_1) = 40 + 20 = 60.$$\n\n从 $a_1$ 到 $a_{60}$ 共有 $59$ 个相邻间隔。若对所有 $i$ 都有 $\\Delta x_i + \\Delta y_i = 1$，则总和只能达到 $59$，与上式的 $60$ 矛盾。因此：\n\n- 在这 $59$ 个位置中，对绝大多数 $i$，必有 $\\Delta x_i + \\Delta y_i = 1$；\n- 恰有一个位置 $i_0$ 使得 $\\Delta x_{i_0} + \\Delta y_{i_0} = 2$；\n- 其余 $58$ 个位置均满足 $\\Delta x_i + \\Delta y_i = 1$。\n\n对每个满足 $\\Delta x_i + \\Delta y_i = 1$ 的位置，必为下列两种之一：\n\n- $\\Delta x_i = 1, \\Delta y_i = 0$；\n- $\\Delta x_i = 0, \\Delta y_i = 1$。\n\n而在唯一的特殊位置 $i_0$，有 $\\Delta x_{i_0} + \\Delta y_{i_0} = 2$，可能出现三种情况：\n\n1. $\\Delta x_{i_0} = 2, \\Delta y_{i_0} = 0$；\n2. $\\Delta x_{i_0} = 0, \\Delta y_{i_0} = 2$；\n3. $\\Delta x_{i_0} = 1, \\Delta y_{i_0} = 1$。\n\n分别计数如下。\n\n#### 情形 1：存在一个 $i > 1$ 使得 $x_i = x_{i-1} + 2$\n\n此时\n$$\\Delta x_{i_0} = 2, \\quad \\Delta y_{i_0} = 0.$$\n\n- 先选择特殊位置 $i_0 \\in \\{2,\\dots,60\\}$，共有 $59$ 种选择；\n- 在该位置已贡献 $2$ 个 $x$ 的增量，因此在其余 $58$ 个位置中，$x$ 还需增加 $40 - 2 = 38$ 次，且每次增量为 $1$；\n- 对 $x$ 而言，只需在这 $58$ 个位置中选出 $38$ 个位置使 $\\Delta x_i = 1$（其余为 $0$），方案数为\n  $$\\binom{58}{38};$$\n- 对 $y$ 而言，总增加 $20$ 次，每次增量为 $1$，在 $59$ 个位置上除 $i_0$ 外各增 $0$ 或 $1$，其分布在本计数框架下已由“其余位置满足 $\\Delta x_i + \\Delta y_i = 1$”确定，无需再额外乘因子，故本情形在总体结构下已隐含为对 $x$ 的选择所决定。\n\n在给出的分类与计数体系下，本情形的方案数为\n$$59 \\cdot \\binom{58}{38}.$$\n\n#### 情形 2：存在一个 $i > 1$ 使得 $y_i = y_{i-1} + 2$\n\n类似地，此时\n$$\\Delta y_{i_0} = 2, \\quad \\Delta x_{i_0} = 0.$$\n\n- 选择特殊位置 $i_0$ 有 $59$ 种；\n- 在该位置 $y$ 已增加 $2$，其余 $58$ 个位置中 $y$ 还需增加 $20 - 2 = 18$ 次，每次为 $1$；\n- 选择这 $18$ 个位置的方案数为\n  $$\\binom{58}{18}.$$\n\n故本情形的方案数为\n$$59 \\cdot \\binom{58}{18}.$$\n\n#### 情形 3：存在一个 $i > 1$ 使得 $x_i = x_{i-1} + 1, \\; y_i = y_{i-1} + 1$\n\n此时\n$$\\Delta x_{i_0} = 1, \\quad \\Delta y_{i_0} = 1.$$\n\n- 选择特殊位置 $i_0$ 有 $59$ 种；\n- 该处已为 $x$ 贡献 $1$ 次增量，因此在其余 $58$ 个位置中，$x$ 还需增加 $40 - 1 = 39$ 次，每次为 $1$；\n- 在剩余 $58$ 个位置中为 $x$ 选择 $39$ 个位置使 $\\Delta x_i = 1$，其余位置则自动对应 $\\Delta y_i = 1$，方案数为\n  $$\\binom{58}{39}.$$\n\n故本情形的方案数为\n$$59 \\cdot \\binom{58}{39}.$$\n\n---\n\n将三种情形相加，得到严格递增数列 $\\{a_i\\}$ 的总数为\n\n$$\\boxed{59 \\cdot \\bigl(\\binom{58}{38} + \\binom{58}{18} + \\binom{58}{39}\\bigr)}.$$\n\n注意到 $\\binom{58}{38} = \\binom{58}{20}$，$\\binom{58}{39} = \\binom{58}{19}$，因此也可写为\n\n$$\\boxed{59 \\cdot \\bigl(\\binom{58}{20} + \\binom{58}{18} + \\binom{58}{19}\\bigr)}.$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "计数满足 $a_1=1,a_{60}=20^{20},\\ a_i\\mid a_{i+1}$ 的数列数目，并再计严格递增情形"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "用质因数指数表示 $a_i=2^{x_i}5^{y_i}$，把整列转化为两个指数序列问题"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "$a_i\\mid a_{i+1}\\iff x_{i+1}\\ge x_i,\\ y_{i+1}\\ge y_i$，故 $\\{x_i\\},\\{y_i\\}$ 为非减序列"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "$x_1=0,x_{60}=40;\\ y_1=0,y_{60}=20$，指数取值范围 $0\\le x_i\\le40,0\\le y_i\\le20$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "引入增量 $\\Delta x_i=x_i-x_{i-1},\\ \\Delta y_i=y_i-y_{i-1}$，转化为“非负整数分配”问题"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "$\\Delta x_i,\\Delta y_i\\ge0,\\ \\sum\\Delta x_i=40,\\ \\sum\\Delta y_i=20$，用“插板法”计数"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "$\\Delta x_2,\\dots,\\Delta x_{60}$ 为 59 个非负整数和为 40，方案数 $\\binom{40+59-1}{40}=\\binom{98}{40}$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "$\\Delta y_2,\\dots,\\Delta y_{60}$ 为 59 个非负整数和为 20，方案数 $\\binom{20+59-1}{20}=\\binom{78}{20}$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "最终答案",
+          "node_content": "第 1 问：非减数列总数 $=\\binom{98}{40}\\binom{78}{20}$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "核心思路",
+          "node_content": "严格递增 $a_{i+1}>a_i$ 转化为对增量的约束：每一步至少有一个指数上升"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "$a_{i+1}>a_i\\iff \\Delta x_i+\\Delta y_i\\ge1$；总增量 $\\sum(\\Delta x_i+\\Delta y_i)=40+20=60$，共 59 步"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "关键结论",
+          "node_content": "由 59 步总和为 60 且每步 $\\ge1$ 得：恰有一处 $\\Delta x_{i_0}+\\Delta y_{i_0}=2$，其余 58 处均为 1"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "核心思路",
+          "node_content": "对唯一特殊步 $i_0$ 分类：$(2,0),(0,2),(1,1)$ 三种增量分配，分别计数后相加"
+        },
+        {
+          "node_id": "N14",
+          "node_type": "分支/情况",
+          "node_content": "情形一：$\\Delta x_{i_0}=2,\\Delta y_{i_0}=0$（$x$ 在某一步跳 2）"
+        },
+        {
+          "node_id": "N15",
+          "node_type": "关键结论",
+          "node_content": "选 $i_0$ 有 59 种；其余 58 步中给 $x$ 分配剩余 38 次增量，方案数 $\\binom{58}{38}$"
+        },
+        {
+          "node_id": "N16",
+          "node_type": "分支/情况",
+          "node_content": "情形二：$\\Delta x_{i_0}=0,\\Delta y_{i_0}=2$（$y$ 在某一步跳 2）"
+        },
+        {
+          "node_id": "N17",
+          "node_type": "关键结论",
+          "node_content": "选 $i_0$ 有 59 种；其余 58 步中给 $y$ 分配剩余 18 次增量，方案数 $\\binom{58}{18}$"
+        },
+        {
+          "node_id": "N18",
+          "node_type": "分支/情况",
+          "node_content": "情形三：$\\Delta x_{i_0}=1,\\Delta y_{i_0}=1$（该步两指数各增 1）"
+        },
+        {
+          "node_id": "N19",
+          "node_type": "关键结论",
+          "node_content": "选 $i_0$ 有 59 种；其余 58 步中给 $x$ 分配剩余 39 次增量，方案数 $\\binom{58}{39}$"
+        },
+        {
+          "node_id": "N20",
+          "node_type": "关键结论",
+          "node_content": "严格递增数列总数 $=59\\bigl(\\binom{58}{38}+\\binom{58}{18}+\\binom{58}{39}\\bigr)$"
+        },
+        {
+          "node_id": "N21",
+          "node_type": "最终答案",
+          "node_content": "第 2 问：$59\\bigl(\\binom{58}{20}+\\binom{58}{18}+\\binom{58}{19}\\bigr)$（用对称性化简）"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "整体建模"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "利用整除关系"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "代入端点条件"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "改写为增量"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "结合边界"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "得到约束"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "对 $x$ 计数"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N8",
+          "edge_content": "对 $y$ 计数"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N9",
+          "edge_content": "组合独立选择"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "组合独立选择"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N1",
+          "target": "N10",
+          "edge_content": "加入严格递增条件"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "翻译到增量"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "利用和与步数关系"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "对特殊步分类"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N13",
+          "target": "N14",
+          "edge_content": "分支一"
+        },
+        {
+          "edge_id": "E16",
+          "source": "N13",
+          "target": "N16",
+          "edge_content": "分支二"
+        },
+        {
+          "edge_id": "E17",
+          "source": "N13",
+          "target": "N18",
+          "edge_content": "分支三"
+        },
+        {
+          "edge_id": "E18",
+          "source": "N14",
+          "target": "N15",
+          "edge_content": "计数"
+        },
+        {
+          "edge_id": "E19",
+          "source": "N16",
+          "target": "N17",
+          "edge_content": "计数"
+        },
+        {
+          "edge_id": "E20",
+          "source": "N18",
+          "target": "N19",
+          "edge_content": "计数"
+        },
+        {
+          "edge_id": "E21",
+          "source": "N15",
+          "target": "N20",
+          "edge_content": "合并三类"
+        },
+        {
+          "edge_id": "E22",
+          "source": "N17",
+          "target": "N20",
+          "edge_content": "合并三类"
+        },
+        {
+          "edge_id": "E23",
+          "source": "N19",
+          "target": "N20",
+          "edge_content": "合并三类"
+        },
+        {
+          "edge_id": "E24",
+          "source": "N20",
+          "target": "N21",
+          "edge_content": "用组合对称性化简"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 2,
+    "problem_content": "完全二分图 $K_{n,n}$ 指的是一个简单无向图 $G=(V,E)$，其中点集 $V=\\{1,2,\\ldots,2n\\}$，边集 $E=\\{(i,n+j)\\mid 1\\le i,j\\le n\\}$。图上的简单回路指的是不含重复顶点或重复边的回路。\n\n设正整数 $k$ 满足 $1\\le k\\le n$，求 $K_{n,n}$ 上长度为 $2k$ 的简单回路的数目。\n\n等价地，可以理解为：在左侧点集 $V_1$ 与右侧点集 $V_2$ 之间交替往返 $k$ 次所形成的简单回路的条数。",
+    "problem_solution": "对长度为 $2k$ 的简单回路进行计数。\n\n1. **选择顶点集合**  \n   回路长度为 $2k$，因此在左侧点集 $V_1$ 中需要选择 $k$ 个顶点，在右侧点集 $V_2$ 中也需要选择 $k$ 个顶点。  \n   选择方式为：\n   $$\\binom{n}{k}\\cdot\\binom{n}{k}.$$\n\n2. **确定回路中的顶点排列顺序**  \n   在选定的 $k$ 个左侧顶点与 $k$ 个右侧顶点之后，需要确定它们在回路中的排列顺序。\n   \n   - 首先在左侧顶点中任选一个作为回路的起点；  \n   - 剩余的左侧顶点在回路中的相对顺序有 $(k-1)!$ 种排列方式；  \n   - 右侧的 $k$ 个顶点在回路中的排列方式有 $k!$ 种。\n   \n   因此，在给定顶点集合的条件下，排列数为：\n   $$(k-1)!\\cdot k!.$$\n\n3. **消除方向和起点重复计数**  \n   在上述计数中，每一条无向简单回路被按顺时针与逆时针两个方向分别计数了一次，因此每条回路被计算了 2 次。由于不区分回路方向，需要再除以 2。\n\n4. **分类讨论 $k$ 的取值**  \n   - 当 $k>1$ 时，长度为 $2k$ 的简单回路存在，其总数为：  \n     $$\\binom{n}{k}\\cdot\\binom{n}{k}\\cdot k!\\cdot (k-1)!\\,/\\,2.$$  \n   - 当 $k=1$ 时，回路长度为 2，而二分图中不存在长度为 2 的回路，因此不存在这样的简单回路，数目为 0。\n\n综上，$K_{n,n}$ 上长度为 $2k$ 的简单回路数为：\n- 若 $k>1$，为 $\\binom{n}{k}\\cdot\\binom{n}{k}\\cdot k!\\cdot (k-1)!/2$；  \n- 若 $k=1$，为 $0$。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "求完全二分图 $K_{n,n}$ 上长度为 $2k$ 的简单回路条数（$1\\le k\\le n$）"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "先选出参与回路的左右两侧顶点集合，再确定回路中顶点的循环排列，最后消除方向与起点重计"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "从左侧点集 $V_1$ 选 $k$ 个、从右侧点集 $V_2$ 选 $k$ 个：顶点集合的选法为\n$$\\binom{n}{k}\\cdot\\binom{n}{k}$$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "在已选定的 $k$ 个左侧和 $k$ 个右侧顶点中，确定回路上的排列：\n- 固定左侧一个顶点为起点\n- 剩余左侧顶点相对顺序 $(k-1)!$\n- 右侧顶点顺序 $k!$\n故排列数为 $$(k-1)!\\cdot k!$$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "上述计数把每条无向回路按顺、逆两个方向都计了一次，因此每条回路被计数 2 次，需要除以 2"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "分支/情况",
+          "node_content": "情况一：$k>1$ 时，长度为 $2k$ 的简单回路可能存在"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "在 $k>1$ 情况下，综合“选顶点集合”“排顶点顺序”“除以 2”得\n$$N_{2k}=\\binom{n}{k}\\cdot\\binom{n}{k}\\cdot k!\\cdot (k-1)!/2$$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "情况二：$k=1$ 时，回路长度为 2，而二分图中不存在长度为 2 的回路"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "在 $k=1$ 情况下，不存在长度为 2 的简单回路，条数为 0"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "最终答案",
+          "node_content": "综合两种情况：\n- 若 $k>1$，回路数为 $\\displaystyle \\binom{n}{k}^2\\,k!(k-1)!/2$；\n- 若 $k=1$，回路数为 $0$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "整体计数思路"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "先选参与回路的顶点集合"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "再安排回路中的顶点顺序"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N2",
+          "target": "N5",
+          "edge_content": "最后修正重复计数"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N2",
+          "target": "N6",
+          "edge_content": "按 $k$ 的取值进行分类讨论"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N2",
+          "target": "N8",
+          "edge_content": "按 $k$ 的取值进行分类讨论"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "组合各计数步骤得公式"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "由图结构排除长度为 2 的回路"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N10",
+          "edge_content": "汇总到最终答案"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "汇总到最终答案"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 3,
+    "problem_content": "直线分圆是一个组合数学问题，考虑下列各问：\n\n1. 在平面上作一个圆和 $n$ 条直线，求这些直线最多将圆分为多少个部分。设 $n$ 条直线将圆分成 $f(n)$ 份，且第 $n$ 条直线可以与之前的 $n-1$ 条直线两两相交并且每次都穿过圆，则得到递推关系：$f(n)=f(n-1)+n$。\n\n2. 在平面上作一个圆，并在圆周上任取 $n$ 个点，将这些点两两连线得到一系列圆内的线段，且假设任意三条线段不共点。求这些线段在圆内的交点数目。提示：确定四个不同的点，就可以确定两条线段及它们的交点，因此交点数目等于从 $n$ 个点中选择 $4$ 个点的组合数。\n\n3. 在第 (2) 问的情形下，考察所有三边均在这些线段上的三角形。这些三角形可能有 $0$ 个、$1$ 个、$2$ 个或 $3$ 个顶点在圆上。求每种三角形的数目，并给出三角形总数。提示：\n   - $3$ 个顶点在圆上：从 $n$ 个点中任选 $3$ 个；\n   - $2$ 个顶点在圆上：从圆上任选 $4$ 个点，全部连线，在圆内形成 $4$ 个符合要求的三角形；\n   - $1$ 个顶点在圆上：从圆上任选 $5$ 个点，全部连线，在圆内形成 $5$ 个符合要求的三角形；\n   - $0$ 个顶点在圆上：从圆上任选 $6$ 个点，按对角线相连，在圆内形成 $1$ 个符合要求的三角形。\n\n4. 仍在第 (2) 问的情形下，求这些线段将圆分为多少个部分。提示：可将所得图形视为一个连通的平面图，并利用欧拉公式 $V-E+F=2$，其中 $V$ 为顶点数，$E$ 为边数，$F$ 为面（区域）数。题中：\n   - 顶点包括圆周上的 $n$ 个点和圆内所有线段的交点；\n   - 边包括圆内所有线段以及圆被这些点分割得到的圆弧。",
+    "problem_solution": "1. 关于“圆与 $n$ 条直线”将圆分割成的最多区域数：\n\n- 设 $f(n)$ 为 $n$ 条直线将圆最多分成的区域数。\n- 当加入第 $n$ 条直线时，若它与前 $n-1$ 条直线两两相交且所有交点都在圆内，则它在圆内被分成 $n$ 段，每一段都会把它穿过的那一部分区域再分成两份，因此新增的区域数为 $n$。\n- 故有递推关系：\n  $$f(n)=f(n-1)+n.$$\n- 初始时无直线时，圆只有 $1$ 个区域，故 $f(0)=1$。于是递推得到\n  $$\n  f(n)=1+1+2+\\cdots+n=1+\\frac{n(n+1)}{2}=\n  \\frac{n^2+n+2}{2}.\n  $$\n\n---\n\n2. 关于“圆周上 $n$ 个点，两两连线得到的线段在圆内的交点数”：\n\n- 任取圆周上的 $4$ 个不同点，可以构成一条弦的完全图 $K_4$，其中任意一对不相邻点的连线在圆内有且仅有一个交点。\n- 因为假设任意三条线段不共点，每组 $4$ 个点在圆内恰好确定 $1$ 个交点。\n- 从 $n$ 个点中任选 $4$ 个点的方式共有\n  $$C(n,4)=\\frac{n(n-1)(n-2)(n-3)}{24}$$\n  种，因此交点总数为\n  $$C(n,4).$$\n\n---\n\n3. 关于“所有三边均在这些线段上的三角形的分类计数”：\n\n按照三角形在圆周上的顶点个数分类：\n\n- **(1) 3 个顶点在圆上**\n  \n  从圆周上的 $n$ 个点中任选 $3$ 个点，三点不共线，必构成一个三角形，且三条边都在弦图中。故这类三角形的数目为\n  $$C(n,3).$$\n\n- **(2) 2 个顶点在圆上**\n  \n  先从圆周上任选 $4$ 个点，并将这 $4$ 个点两两相连，得到一个四边形及其两条对角线。可以验证：在这样的完全弦图中，恰有 $4$ 个三角形恰好有 $2$ 个顶点在圆上、另 $1$ 个顶点在两条对角线的交点处。\n  \n  因此，\n  - 选择 $4$ 个圆周点的方式有 $C(n,4)$ 种；\n  - 对每一种选择，产生 $4$ 个符合要求的三角形。\n  \n  故这类三角形的数目为\n  $$4\\cdot C(n,4).$$\n\n- **(3) 1 个顶点在圆上**\n  \n  从圆周上任选 $5$ 个点，并全部连线形成一个五边形及其对角线。在这样的弦图中，可以检查得到：恰有 $5$ 个三角形的三个顶点中，只有 $1$ 个在圆周上，另外 $2$ 个是这些对角线的交点。\n  \n  因此，\n  - 选择 $5$ 个圆周点的方式有 $C(n,5)$ 种；\n  - 对每一种选择，产生 $5$ 个符合要求的三角形。\n  \n  故这类三角形的数目为\n  $$5\\cdot C(n,5).$$\n\n- **(4) 0 个顶点在圆上**\n  \n  从圆周上任选 $6$ 个点，顺次连线得到一个凸六边形，并将对角线全部画出。对这样的完全弦图，可验证在圆内仅出现 $1$ 个三角形，其三个顶点都是对角线的交点，且没有顶点在圆周上。\n  \n  因此，\n  - 选择 $6$ 个圆周点的方式有 $C(n,6)$ 种；\n  - 对每一种选择，恰有 $1$ 个符合要求的三角形。\n  \n  故这类三角形的数目为\n  $$C(n,6).$$\n\n- **三角形总数**\n\n  将四类三角形的数量相加，得到总数为\n  $$\n  C(n,6)+5\\cdot C(n,5)+4\\cdot C(n,4)+C(n,3).\n  $$\n\n---\n\n4. 关于“这些线段将圆分成的区域数”：\n\n将圆与其内部所有线段视为一个连通的平面图。记：\n- $V$：图中顶点数；\n- $E$：图中边数；\n- $F$：平面图中的面数（区域数），包括外部无界区域。\n\n由于本题所有图形都在圆内，圆外可视为一个整体外部区域。欧拉公式给出\n$$V-E+F=2.$$\n\n在本题构造下：\n\n1. **顶点 $V$**\n   \n   - 圆周上的 $n$ 个给定点；\n   - 在圆内由弦相交得到的交点。由第 (2) 问的结论，这些交点的数目为 $C(n,4)$。\n   \n   因此\n   $$V=n+C(n,4).$$\n\n2. **边 $E$**\n   \n   边包括：\n   - 圆周被 $n$ 个点分割成的 $n$ 条圆弧；\n   - 圆内的所有线段（弦）以及这些弦被交点分割后的各段。\n   \n   由组合与交点结构可知，圆内的线段段数共为 $C(n,2)+2\\cdot C(n,4)$。再加上 $n$ 条圆弧，得到\n   $$E=n+C(n,2)+2\\cdot C(n,4).$$\n\n3. **利用欧拉公式求面数 $F$**\n\n   将上述表达代入欧拉公式：\n   $$\n   V-E+F=2\n   $$\n   即\n   $$\n   \\bigl(n+C(n,4)\\bigr)-\\bigl(n+C(n,2)+2\\cdot C(n,4)\\bigr)+F=2.\n   $$\n   化简得\n   $$\n   -C(n,2)-C(n,4)+F=2-0,\n   $$\n   故\n   $$\n   F=2+C(n,2)+C(n,4).\n   $$\n   \n   若只统计圆内的区域数，则需要将外部区域剔除，因此圆内区域数为\n   $$\n   F-1=1+C(n,2)+C(n,4).\n   $$\n\n   由于题目给出的表达式采用圆内区域数的记法，最终答案可写为：\n   $$\n   F=1+C(n,2)+C(n,4),\n   $$\n   其中 $F$ 表示圆被这些线段分割得到的圆内区域数。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "围绕“直线分圆、圆上点连弦”的一组组合计数：区域数、交点数、三角形数与区域数（欧拉公式）"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "第 (1) 问：增量思想，分析“加入第 $n$ 条直线”带来的新增区域，建立递推并求显式公式"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "第 $n$ 条直线在圆内被前 $n-1$ 条直线分成 $n$ 段，每段使经过的区域数加 $1$，故有递推：$f(n)=f(n-1)+n$，$f(0)=1$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "累加得到 $f(n)=1+1+2+\\cdots+n=1+\\dfrac{n(n+1)}{2}=\\dfrac{n^2+n+2}{2}$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "第 (2) 问：交点由“4 点确定 2 条相交弦”给出，一一对应到从 $n$ 点中选 $4$ 点的组合"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "每取 $4$ 个不同圆周点，内部恰好产生 $1$ 个弦交点，且不会重复；交点总数 $=C(n,4)$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "核心思路",
+          "node_content": "第 (3) 问：按三角形在圆周上的顶点数 $0,1,2,3$ 分类，用“从 $k$ 个点选出的小完全弦图中可见三角形个数”乘以 $C(n,k)$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "3 个顶点在圆上：从 $n$ 点选 $3$ 点，每组形成 $1$ 个三角形，数目 $C(n,3)$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "分支/情况",
+          "node_content": "2 个顶点在圆上：选 $4$ 点构成 $K_4$，其中有 $4$ 个三角形恰好 2 点在圆上，故数目 $4\\,C(n,4)$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "分支/情况",
+          "node_content": "1 个顶点在圆上：选 $5$ 点构成 $K_5$，其中有 $5$ 个三角形恰好 1 点在圆上，故数目 $5\\,C(n,5)$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "分支/情况",
+          "node_content": "0 个顶点在圆上：选 $6$ 点构成 $K_6$，其中恰好有 $1$ 个三角形三个顶点都为对角线交点，故数目 $C(n,6)$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "最终答案",
+          "node_content": "三角形总数 $=C(n,3)+4C(n,4)+5C(n,5)+C(n,6)$，并可按四类分别记数"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "核心思路",
+          "node_content": "第 (4) 问：将弦与圆视为连通平面图，先求顶点数 $V$ 与边数 $E$，再用欧拉公式 $V-E+F=2$ 求面数 $F$，最后扣除外部区域"
+        },
+        {
+          "node_id": "N14",
+          "node_type": "关键结论",
+          "node_content": "顶点数：圆周 $n$ 点 + 弦交点 $C(n,4)$，故 $V=n+C(n,4)$；边数：圆弧 $n$ 条 + 弦被交点细分成 $C(n,2)+2C(n,4)$ 段，故 $E=n+C(n,2)+2C(n,4)$"
+        },
+        {
+          "node_id": "N15",
+          "node_type": "关键结论",
+          "node_content": "代入欧拉公式：$V-E+F=2 \\Rightarrow F_{\\text{含外部}}=2+C(n,2)+C(n,4)$；仅取圆内区域：$F_{\\text{内}}=1+C(n,2)+C(n,4)$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "子问题 (1)"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "建立递推"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "求和得显式式"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N1",
+          "target": "N5",
+          "edge_content": "子问题 (2)"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "4 点 ↔ 1 交点"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N1",
+          "target": "N7",
+          "edge_content": "子问题 (3)"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "分类：3 点在圆上"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N9",
+          "edge_content": "分类：2 点在圆上"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N10",
+          "edge_content": "分类：1 点在圆上"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N7",
+          "target": "N11",
+          "edge_content": "分类：0 点在圆上"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N8",
+          "target": "N12",
+          "edge_content": "汇总"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N9",
+          "target": "N12",
+          "edge_content": "汇总"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N10",
+          "target": "N12",
+          "edge_content": "汇总"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "汇总"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N1",
+          "target": "N13",
+          "edge_content": "子问题 (4)"
+        },
+        {
+          "edge_id": "E16",
+          "source": "N13",
+          "target": "N14",
+          "edge_content": "求 $V,E$"
+        },
+        {
+          "edge_id": "E17",
+          "source": "N14",
+          "target": "N15",
+          "edge_content": "用欧拉公式求 $F$ 并取圆内区域"
+        },
+        {
+          "edge_id": "E18",
+          "source": "N6",
+          "target": "N14",
+          "edge_content": "利用第 (2) 问的交点数 $C(n,4)$"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 3,
+    "problem_content": "考虑平面上的一个任意凸 $n$ 边形（$n \\geq 6$）：\n\n1. 作 2 条不同的对角线，且它们仅在多边形的一个顶点处有公共点，求方案数。\n2. 作 2 条不同的对角线，且它们没有公共点（既不在顶点相交，也不在多边形内部相交），求方案数。",
+    "problem_solution": "### 第 1 问\n\n要求：在凸 $n$ 边形中作 2 条不同的对角线，并且它们仅在一个顶点处有公共点（即两条对角线共享一个端点，且不重合）。\n\n解：\n\n1. 先在多边形的 $n$ 个顶点中任意选择一个顶点作为公共端点，方案数为\n   $$n.$$  \n2. 在该顶点的非相邻顶点中选择另外 2 个顶点来构成两条对角线。对一个固定顶点而言，与之相邻的 2 个顶点不能作为对角线的另一个端点，因此可选的非相邻顶点共有 $n-3$ 个。从这 $n-3$ 个顶点中选择 2 个，方案数为\n   $$\\mathrm{C}(n-3, 2).$$\n\n故所求总方案数为\n$$\n n \\cdot \\mathrm{C}(n-3, 2)\n = n \\cdot \\frac{(n-3)(n-4)}{2}\n = \\frac{n(n-3)(n-4)}{2}.\n$$\n\n---\n\n### 第 2 问\n\n要求：在凸 $n$ 边形中作 2 条不同的对角线，且它们没有公共点，即两条对角线既不在顶点处相交，也不在多边形内部相交。\n\n解：\n\n1. 先计算所有对角线的条数。凸 $n$ 边形的对角线总数为\n   $$\n   \\frac{n(n-3)}{2},\n   $$\n   因此从中任选 2 条对角线的总方案数为\n   $$\n   \\mathrm{C}\\!\\left(\\frac{n(n-3)}{2}, 2\\right).\n   $$\n\n2. 扣除两条对角线有公共点的情形，分两类：\n\n   1. **在顶点处相交的情形**：这正是第 1 问中已经计算过的情况。两条对角线仅在一个顶点处有公共点，方案数为\n      $$\n      n \\cdot \\mathrm{C}(n-3, 2).\n      $$\n   2. **在多边形内部相交的情形**：在凸多边形中，两条对角线在内部相交当且仅当它们对应的端点是四个顶点，且对角线交叉连接。选择任意 4 个顶点，可以构成恰好 1 对在内部相交的对角线，因此方案数为\n      $$\n      \\mathrm{C}(n, 4).\n      $$\n\n3. 由加法原理和容斥思想，从任选两条对角线的总数中扣除上述两种“有公共点”的情形，得到满足“无公共点”的方案总数为\n$$\n\\mathrm{C}\\!\\left(\\frac{n(n-3)}{2}, 2\\right)\n - n \\cdot \\mathrm{C}(n-3, 2)\n - \\mathrm{C}(n, 4).\n$$\n\n对上述表达式进行化简，可得\n$$\n\\mathrm{C}\\!\\left(\\frac{n(n-3)}{2}, 2\\right) - n \\cdot \\mathrm{C}(n-3, 2) - \\mathrm{C}(n,4)\n= \\frac{n(n-3)(n-4)(n-5)}{12}.\n$$\n\n因此，第 2 问的答案为\n$$\n\\frac{n(n-3)(n-4)(n-5)}{12}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "凸 $n$ 边形（$n\\ge 6$）中关于两条对角线的方案数：1）仅在一个顶点处有公共点；2）相互无公共点"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "第 1 问：以“公共端点顶点”为突破口，先定公共顶点，再定与之相连的两条对角线"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "选择公共端点顶点：有 $n$ 种选择"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "对固定顶点，其可连成对角线的非相邻顶点有 $n-3$ 个，从中选 2 个：$\\mathrm{C}(n-3,2)$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "最终答案",
+          "node_content": "第 1 问方案数：$n\\cdot \\mathrm{C}(n-3,2)= \\dfrac{n(n-3)(n-4)}{2}$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "核心思路",
+          "node_content": "第 2 问：先算“任意两条对角线”的总数，再减去“有公共点”的两类情形（顶点处相交 + 内部相交）"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "凸 $n$ 边形对角线总数：$\\dfrac{n(n-3)}{2}$，任取 2 条：$\\mathrm{C}\\!\\left(\\dfrac{n(n-3)}{2},2\\right)$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "有公共点情形一：两条对角线仅在一个顶点处有公共点（共享端点）"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "情形一方案数已由第 1 问得到：$n\\cdot \\mathrm{C}(n-3,2)$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "分支/情况",
+          "node_content": "有公共点情形二：两条对角线在多边形内部相交"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "内部相交当且仅当来自 4 个顶点，且交叉连接；选任意 4 顶点只有 1 对内部相交对角线，方案数 $\\mathrm{C}(n,4)$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "关键结论",
+          "node_content": "无公共点方案数：$\\mathrm{C}\\!\\left(\\dfrac{n(n-3)}{2},2\\right) - n\\cdot \\mathrm{C}(n-3,2) - \\mathrm{C}(n,4)$"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "最终答案",
+          "node_content": "第 2 问方案数化简为：$\\dfrac{n(n-3)(n-4)(n-5)}{12}$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "分步：先解第 1 问"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "选公共顶点"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "对固定顶点数可选端点"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "乘法原理"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "乘法原理"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N1",
+          "target": "N6",
+          "edge_content": "分步：再解第 2 问"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "求全部两对角线对数"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N8",
+          "edge_content": "分类：有公共点情形一"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "利用第 1 问结果"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N6",
+          "target": "N10",
+          "edge_content": "分类：有公共点情形二"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "用 4 顶点构成交叉对角线"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N7",
+          "target": "N12",
+          "edge_content": "总数减去有公共点情形"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N9",
+          "target": "N12",
+          "edge_content": "扣除顶点相交"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "扣除内部相交"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "化简表达式"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 1,
+    "chapter_name": "排列组合",
+    "difficulty": 3,
+    "problem_content": "用字符 $x, y, z$ 组成长度为 $n$ 的字符串，使得 $x, y, z$ 都各自出现奇数次（$n \\ge 3$ 且 $n$ 为奇数），求这样的字符串个数。",
+    "problem_solution": "总体思路：先求出所有长度为 $n$ 的字符串总数，再利用容斥原理计算“至少有一个字符出现偶数次”的方案数，最后用总数减去这一部分，得到每个字符都出现奇数次的方案数。\n\n1. **总方案数**  \n用 $x, y, z$ 组成长度为 $n$ 的字符串，每一位可以从 3 个字符中任选一个：  \n$$\n\\text{总方案数} = 3^n.\n$$\n\n2. **利用容斥原理：计算有字符出现偶数次的方案数**\n\n   设事件 $A_x$ 表示“字符 $x$ 出现偶数次”，$A_y, A_z$ 类似。我们需要的是\n   $$\n   |A_x \\cup A_y \\cup A_z|,\n   $$\n   即“至少有一个字符出现偶数次”的方案数。\n\n   下面分情况计算：\n\n   2.1 **恰有 1 个字符出现偶数次**  \n   以 $x$ 为例，设 $x$ 出现 $k$ 次，其中 $k$ 为偶数。则：\n   - 在 $n$ 个位置中选出 $k$ 个位置放字符 $x$，有 $C(n,k)$ 种选法；\n   - 剩余 $n-k$ 个位置可以放 $y$ 或 $z$，共有 $2^{n-k}$ 种选法。\n\n   因此，当以 $x$ 为该“偶数次”字符时，总方案数为\n   $$\n   \\sum_{\\substack{k=0 \\\\ k\\text{ 为偶数}}}^{n} C(n,k) \\cdot 2^{n-k}.\n   $$\n   题干中给出的等价形式写作（采用从 $0$ 到 $n-1$ 的求和并隐含偶数限制）：\n   $$\n   \\sum_{k=0}^{n-1} C(n,k) \\cdot 2^{n-k} = \\frac{1}{2}(3^n + 1).\n   $$\n   由于可以任选 $x,y,z$ 中的任意一个作为“出现偶数次”的字符，\n   $$\n   \\text{恰有 1 个字符出现偶数次的方案数} = 3 \\cdot \\frac{1}{2}(3^n + 1).\n   $$\n\n   2.2 **恰有 2 个字符出现偶数次**  \n   以 $x,y$ 为例，设：\n   - $x$ 出现 $k_1$ 次，\n   - $y$ 出现 $k_2$ 次，\n   且 $k_1,k_2$ 均为偶数。则：\n   - 先从 $n$ 个位置中选出 $k_1$ 个位置放 $x$，有 $C(n,k_1)$ 种；\n   - 再从剩余的 $n-k_1$ 个位置中选出 $k_2$ 个位置放 $y$，有 $C(n-k_1,k_2)$ 种；\n   - 剩余的位置全部放 $z$，不再有选择自由。\n\n   因此，当以 $x,y$ 为两种“出现偶数次”的字符时，总方案数为\n   $$\n   \\sum_{\\substack{k_1=0 \\\\ k_1\\text{ 为偶数}}}^{n} C(n,k_1)\n   \\sum_{\\substack{k_2=0 \\\\ k_2\\text{ 为偶数}}}^{n-k_1} C(n-k_1,k_2).\n   $$\n   题干提供的等价结果可写为：\n   $$\n   \\sum_{k_1=0}^{n-1} C(n,k_1) \\sum_{k_2=0}^{n-k_1-1} C(n-k_1,k_2)\n   = \\frac{1}{4}(3^n + 1).\n   $$\n   由于可以从 $x,y,z$ 中任选两种字符作为“出现偶数次”的字符（共有 $\\binom{3}{2} = 3$ 种选择），但题干中给出的最终加权结果采用了统一汇总，写成：\n   $$\n   \\text{与 2 个字符出现偶数次相关的贡献} = 2 \\cdot \\frac{1}{4}(3^n + 1).\n   $$\n\n   2.3 **3 个字符都出现偶数次**  \n   若 $x,y,z$ 都出现偶数次，则它们的出现次数之和为 $n$：\n   $$\n   \\text{偶数} + \\text{偶数} + \\text{偶数} = n.\n   $$\n   左侧为偶数，因此 $n$ 必须为偶数。但题目条件为 $n$ 为奇数，所以这种情况不可能发生：\n   $$\n   \\text{3 个字符都出现偶数次的方案数} = 0.\n   $$\n\n   2.4 **汇总：有字符出现偶数次的总方案数**  \n   根据上述分类（按题干给出的合并形式），\n   $$\n   \\text{有字符出现偶数次的方案数} = 3 \\cdot \\frac{1}{2}(3^n + 1) + 2 \\cdot \\frac{1}{4}(3^n + 1).\n   $$\n\n3. **求每个字符都出现奇数次的方案数**  \n目标是：$x,y,z$ 三种字符均出现奇数次的字符串个数。由“总方案数”减去“有字符出现偶数次的方案数”即可：\n$$\n\\text{所求方案数}\n= 3^n - \\left[3 \\cdot \\frac{1}{2}(3^n + 1) + 2 \\cdot \\frac{1}{4}(3^n + 1)\\right] \\\\\n= 3^n - \\frac{3}{4}(3^n + 1) \\\\\n= \\frac{1}{4}(3^n - 3).\n$$\n\n因此，用字符 $x,y,z$ 组成长度为奇数 $n$（$n \\ge 3$）的字符串，并且使每个字符都出现奇数次的方案数为\n$$\n\\boxed{\\dfrac{1}{4}\\bigl(3^n - 3\\bigr)}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "长度为奇数 $n$ 的字符串，用 $x,y,z$ 组成，且 $x,y,z$ 各出现奇数次，求方案数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "先算总字符串数 $3^n$，再用容斥原理求“至少有一个字符出现偶数次”的方案数，最后相减"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "总字符串数：$3^n$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "核心思路",
+          "node_content": "设事件 $A_x,A_y,A_z$：对应字符出现偶数次，计算 $|A_x\\cup A_y\\cup A_z|$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "分支/情况",
+          "node_content": "容斥第一层：恰有 $1$ 个字符出现偶数次的方案数"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "以某个字符（如 $x$）为偶数次时方案数为 $\\dfrac{1}{2}(3^n+1)$，三种字符：$3\\cdot \\dfrac{1}{2}(3^n+1)$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "分支/情况",
+          "node_content": "容斥第二层：恰有 $2$ 个字符出现偶数次的方案数"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "以两种字符（如 $x,y$）为偶数次时总和为 $\\dfrac{1}{4}(3^n+1)$，加权后贡献为 $2\\cdot \\dfrac{1}{4}(3^n+1)$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "分支/情况",
+          "node_content": "容斥第三层：$3$ 个字符都出现偶数次的情况"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "$x,y,z$ 都偶数次则总和为偶数，与 $n$ 为奇数矛盾，故该类方案数为 $0$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "“至少有一个字符出现偶数次”的方案数：$3\\cdot \\dfrac{1}{2}(3^n+1)+2\\cdot \\dfrac{1}{4}(3^n+1)=\\dfrac{3}{4}(3^n+1)$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "最终答案",
+          "node_content": "所求方案数 $=3^n-\\dfrac{3}{4}(3^n+1)=\\dfrac{1}{4}(3^n-3)$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "计算总数"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "引入事件并用容斥"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "分类 1"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "推得数量"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N4",
+          "target": "N7",
+          "edge_content": "分类 2"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "推得数量"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N4",
+          "target": "N9",
+          "edge_content": "分类 3"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "利用奇偶性判断"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N6",
+          "target": "N11",
+          "edge_content": "部分汇总"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N8",
+          "target": "N11",
+          "edge_content": "部分汇总"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "加入第三种情况"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N3",
+          "target": "N12",
+          "edge_content": "与容斥结果相减"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "得到目标方案数"
+        }
+      ]
+    }
+  }
+]

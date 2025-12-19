@@ -1,0 +1,601 @@
+[
+  {
+    "chapter_id": 3,
+    "chapter_name": "母函数",
+    "difficulty": 2,
+    "problem_content": "设数列 $\\{a_n\\}$ 的母函数为\n$$A(x) = \\displaystyle\\frac{4-3x}{(1-x)(1+x-x^3)},$$\n定义\n$$b_0 = a_0, \\quad b_1 = a_1 - a_0, \\quad \\dots, \\quad b_n = a_n - a_{n-1}, \\dots$$\n求数列 $\\{b_n\\}$ 的母函数，并将结果化简为封闭形式。",
+    "problem_solution": "记数列 $\\{b_n\\}$ 的母函数为 $B(x)$。由于\n$$b_0 = a_0, \\quad b_n = a_n - a_{n-1} \\ (n \\ge 1),$$\n我们先写出 $A(x)$ 与 $xA(x)$ 的展开式：\n\n1. 母函数 $A(x)$ 展开为\n   $$A(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + \\cdots.$$\n2. 将 $A(x)$ 乘以 $x$ 得到\n   $$x A(x) = a_0 x + a_1 x^2 + a_2 x^3 + a_3 x^4 + \\cdots.$$\n\n将上述两式相减，得到\n$$\n(1 - x) A(x)\n= \\bigl(a_0 + a_1 x + a_2 x^2 + a_3 x^3 + \\cdots\\bigr)\n  - \\bigl(a_0 x + a_1 x^2 + a_2 x^3 + a_3 x^4 + \\cdots\\bigr)\n$$\n即\n$$\n(1 - x) A(x) = a_0 + (a_1 - a_0)x + (a_2 - a_1)x^2 + (a_3 - a_2)x^3 + \\cdots.\n$$\n由 $b_0 = a_0$ 以及 $b_n = a_n - a_{n-1}$ 可知右侧正是数列 $\\{b_n\\}$ 的母函数：\n$$\nB(x) = (1 - x) A(x).\n$$\n将已知的 $A(x)$ 代入，得到\n$$\nB(x) = (1 - x) \\cdot \\frac{4 - 3x}{(1 - x)(1 + x - x^3)} = \\frac{4 - 3x}{1 + x - x^3}.\n$$\n因此，数列 $\\{b_n\\}$ 的母函数为\n$$\nB(x) = \\displaystyle\\frac{4 - 3x}{1 + x - x^3}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "已知 $A(x)=\\dfrac{4-3x}{(1-x)(1+x-x^3)}$，且 $b_0=a_0,\\ b_n=a_n-a_{n-1}$，求数列 $\\{b_n\\}$ 的母函数 $B(x)$ 并化为封闭形式"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "利用母函数系数的“差分”关系，将 $B(x)$ 表示为 $A(x)$ 的简单代数变换"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "将 $A(x)$ 展开为 $A(x)=a_0+a_1x+a_2x^2+a_3x^3+\\cdots$，写出各项系数 $a_n$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "写出 $xA(x)=a_0x+a_1x^2+a_2x^3+a_3x^4+\\cdots$，使各幂次下的系数可以与 $A(x)$ 对齐比较"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "计算 $(1-x)A(x)=A(x)-xA(x)$，得到系数形式：$a_0+(a_1-a_0)x+(a_2-a_1)x^2+\\cdots$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "由 $b_0=a_0,\\ b_n=a_n-a_{n-1}$，识别出 $(1-x)A(x)$ 的系数正是 $b_n$，从而得到 $B(x)=(1-x)A(x)$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "将已知 $A(x)$ 代入：$B(x)=(1-x)\\cdot\\dfrac{4-3x}{(1-x)(1+x-x^3)}$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "最终答案",
+          "node_content": "化简得封闭形式：$B(x)=\\dfrac{4-3x}{1+x-x^3}$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "写出母函数展开"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "构造平移后的母函数"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "与 $xA(x)$ 配合求差"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "与 $A(x)$ 配合求差"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "系数比较，识别为 $b_n$"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "用已知 $A(x)$ 表示 $B(x)$"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "代数化简得到封闭形式"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 3,
+    "chapter_name": "母函数",
+    "difficulty": 2,
+    "problem_content": "设数列 $a_n = n^3$（$n \\geq 0$），求数列 $\\{a_n\\}$ 的母函数，并将结果化简为封闭形式。",
+    "problem_solution": "设数列 $\\{a_n\\}$ 的母函数为\n$$\nA(x) = \\sum_{n=0}^{\\infty} n^3 x^n.\n$$\n\n注意到幂级数\n$$\n\\sum_{n=0}^{\\infty} x^n = 1 + x + x^2 + \\cdots = \\frac{1}{1 - x},\n$$\n其各项系数正好是 $x^n$，可以通过对该母函数求导并做适当变换来构造含有 $n^3$ 的级数。\n\n1. **第一次求导并整理**\n\n对上式两边关于 $x$ 求导，得到：\n$$\n\\sum_{n=0}^{\\infty} n x^{n-1} = 1 + 2x + 3x^2 + \\cdots = \\frac{1}{(1 - x)^2}.\n$$\n\n再两边同乘以 $x$，使幂次变为 $n$：\n$$\n\\sum_{n=0}^{\\infty} n x^n = x + 2x^2 + 3x^3 + \\cdots = \\frac{x}{(1 - x)^2}.\n$$\n\n2. **继续求导构造高次幂系数**\n\n对上式再次进行“求导再乘以 $x$”的操作，可逐步得到含有 $n^2$、$n^3$ 的级数。重复该过程两次，最终可得到\n$$\n\\sum_{n=0}^{\\infty} n^3 x^n = x + 8x^2 + 27x^3 + 64x^4 + \\cdots = \\frac{x(1 + 4x + x^2)}{(1 - x)^4}.\n$$\n\n因此，数列 $a_n = n^3$ 的母函数为\n$$\nA(x) = \\sum_{n=0}^{\\infty} n^3 x^n = \\frac{x + 4x^2 + x^3}{(1 - x)^4}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "求数列 $a_n = n^3$ 的母函数 $A(x)=\\sum_{n=0}^{\\infty} n^3 x^n$ 的封闭形式"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "从基本几何级数 $\\sum x^n = \\dfrac1{1-x}$ 出发，通过“求导+乘以 $x$”逐步把系数从 $1, n, n^2$ 提升到 $n^3$"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "基本级数：$\\displaystyle \\sum_{n=0}^{\\infty} x^n = \\frac{1}{1-x}$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "一次“求导+乘以 $x$”：$\\displaystyle \\sum_{n=0}^{\\infty} n x^n = \\frac{x}{(1-x)^2}$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "继续对 $\\sum n x^n$ 做“求导+乘以 $x$”，构造出含 $n^2$ 的级数 $\\displaystyle \\sum n^2 x^n = \\text{某有理函数}(x)$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "在含 $n^2$ 的级数基础上，再做一次“求导+乘以 $x$”，得到 $\\displaystyle \\sum_{n=0}^{\\infty} n^3 x^n = \\frac{x(1+4x+x^2)}{(1-x)^4}$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "整理分子多项式：$x(1+4x+x^2) = x+4x^2+x^3$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "最终答案",
+          "node_content": "母函数封闭形式：$A(x)=\\displaystyle \\sum_{n=0}^{\\infty} n^3 x^n = \\frac{x+4x^2+x^3}{(1-x)^4}$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "选取起点级数"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "第一次求导并乘以 $x$ 得到 $n$"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "第二次求导并乘以 $x$ 得到 $n^2$"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "第三次求导并乘以 $x$ 得到 $n^3$"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "化简分子多项式"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "得到封闭形式"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 3,
+    "chapter_name": "母函数",
+    "difficulty": 2,
+    "problem_content": "设数列 $a_n = \\displaystyle\\sum_{k=1}^{n+1} k^3$（$n \\geq 0$）。基于习题 3.2，求数列 $\\{a_n\\}$ 的母函数，并将其化简为封闭形式。",
+    "problem_solution": "根据定义，数列 $\\{a_n\\}$ 的母函数为\n$$\nA(x) = \\sum_{n=0}^{\\infty} a_n x^n = \\sum_{n=0}^{\\infty} \\Bigl(\\sum_{k=1}^{n+1} k^3\\Bigr) x^n.\n$$\n交换求和顺序时，注意对每个固定的 $k$，它在内层和式中出现的条件为 $1 \\le k \\le n+1$，即 $n \\ge k-1$。因此\n$$\nA(x) = \\sum_{k=1}^{\\infty} k^3 \\sum_{n=k-1}^{\\infty} x^n.\n$$\n对内层几何级数进行求和：\n$$\n\\sum_{n=k-1}^{\\infty} x^n = x^{k-1}(1 + x + x^2 + \\cdots) = x^{k-1} \\cdot \\frac{1}{1-x}.\n$$\n于是有\n$$\nA(x) = \\sum_{k=1}^{\\infty} k^3 \\cdot x^{k-1} \\cdot \\frac{1}{1-x} = \\frac{1}{1-x} \\sum_{k=1}^{\\infty} k^3 x^{k-1}.\n$$\n将 $x^{k-1}$ 写成 $x^k/x$，得到\n$$\nA(x) = \\frac{1}{1-x} \\cdot \\frac{1}{x} \\sum_{k=1}^{\\infty} k^3 x^k = \\frac{1}{x(1-x)} \\sum_{k=1}^{\\infty} k^3 x^k.\n$$\n由习题 3.2 已知数列 $\\{k^3\\}$ 的母函数为\n$$\n\\sum_{k=0}^{\\infty} k^3 x^k = \\frac{x + 4x^2 + x^3}{(1-x)^4}.\n$$\n注意到 $k=0$ 项为 $0$，因此\n$$\n\\sum_{k=1}^{\\infty} k^3 x^k = \\sum_{k=0}^{\\infty} k^3 x^k = \\frac{x + 4x^2 + x^3}{(1-x)^4}.\n$$\n代入 $A(x)$ 的表达式：\n$$\nA(x) = \\frac{1}{x(1-x)} \\cdot \\frac{x + 4x^2 + x^3}{(1-x)^4}.\n$$\n将分子中的 $x$ 提取出来：\n$$\nx + 4x^2 + x^3 = x(1 + 4x + x^2),\n$$\n于是\n$$\nA(x) = \\frac{1}{x(1-x)} \\cdot \\frac{x(1 + 4x + x^2)}{(1-x)^4} = \\frac{1 + 4x + x^2}{(1-x)^5}.\n$$\n因此，数列 $\\{a_n\\}$ 的母函数的封闭形式为\n$$\nA(x) = \\frac{1 + 4x + x^2}{(1-x)^5}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "已知 $a_n = \\sum_{k=1}^{n+1} k^3$，求数列 $\\{a_n\\}$ 的母函数 $A(x)$ 并化为封闭形式"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "用母函数定义写出 $A(x)$，交换求和顺序，将其表示成与已知 $\\{k^3\\}$ 母函数相关的形式"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "按定义写出母函数：\n$$A(x) = \\sum_{n=0}^{\\infty} a_n x^n = \\sum_{n=0}^{\\infty} \\Bigl(\\sum_{k=1}^{n+1} k^3\\Bigr) x^n$$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "交换求和顺序并确定指标范围：对每个固定 $k$，需 $n \\ge k-1$，故\n$$A(x) = \\sum_{k=1}^{\\infty} k^3 \\sum_{n=k-1}^{\\infty} x^n$$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "将内层和式视为几何级数并求和：\n$$\\sum_{n=k-1}^{\\infty} x^n = x^{k-1} \\cdot \\frac{1}{1-x}$$\n从而\n$$A(x) = \\frac{1}{1-x} \\sum_{k=1}^{\\infty} k^3 x^{k-1}$$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "用 $x^{k-1} = x^k/x$ 改写，使之与标准母函数匹配：\n$$A(x) = \\frac{1}{x(1-x)} \\sum_{k=1}^{\\infty} k^3 x^k$$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "核心思路",
+          "node_content": "利用已知数列 $\\{k^3\\}$ 的母函数，将 $\\sum k^3 x^k$ 换成封闭形式"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "由习题 3.2：\n$$\\sum_{k=0}^{\\infty} k^3 x^k = \\frac{x + 4x^2 + x^3}{(1-x)^4}$$\n且 $k=0$ 项为 0，故\n$$\\sum_{k=1}^{\\infty} k^3 x^k = \\frac{x + 4x^2 + x^3}{(1-x)^4}$$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "代回 $A(x)$ 并化简整体分式：\n$$A(x) = \\frac{1}{x(1-x)} \\cdot \\frac{x + 4x^2 + x^3}{(1-x)^4}$$\n提取分子中的 $x$：$x + 4x^2 + x^3 = x(1+4x+x^2)$，得到\n$$A(x) = \\frac{1+4x+x^2}{(1-x)^5}$$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "最终答案",
+          "node_content": "数列 $\\{a_n\\}$ 的母函数封闭形式为\n$$A(x) = \\frac{1 + 4x + x^2}{(1-x)^5}$$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "按定义写出母函数"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "交换求和顺序"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "识别并求几何级数"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "整理为标准母函数形式"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "准备利用已知母函数"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "调用已知结果"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "代入并化简"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "给出封闭形式"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 3,
+    "chapter_name": "母函数",
+    "difficulty": 2,
+    "problem_content": "设 $n$ 是正整数，有不定方程\n$$a + b + c + d + e = n.$$ \n求此方程在满足以下全部条件时的非负整数解的个数：\n\n- $a$ 为偶数；\n- $b \\leq 3$；\n- $c$ 是 $4$ 的倍数；\n- $d \\leq 1$；\n- $e$ 无限制。",
+    "problem_solution": "利用母函数方法，分别构造各个变量在给定约束下的取值母函数，然后将这些母函数相乘得到总母函数 $A(x)$，其中 $x^n$ 的系数即为所求解的个数。\n\n1. 各变量的母函数\n\n- 变量 $a$：$a$ 为非负偶整数，可能取值为 $0,2,4,\\dots$，其母函数为\n  $$A_a(x) = 1 + x^2 + x^4 + \\cdots = \\frac{1}{1 - x^2}.$$\n\n- 变量 $b$：$b$ 为非负整数且 $b \\leq 3$，可能取值为 $0,1,2,3$，其母函数为\n  $$A_b(x) = 1 + x + x^2 + x^3 = \\frac{1 - x^4}{1 - x}.$$\n\n- 变量 $c$：$c$ 为非负整数且是 $4$ 的倍数，可能取值为 $0,4,8,\\dots$，其母函数为\n  $$A_c(x) = 1 + x^4 + x^8 + \\cdots = \\frac{1}{1 - x^4}.$$\n\n- 变量 $d$：$d$ 为非负整数且 $d \\leq 1$，可能取值为 $0,1$，其母函数为\n  $$A_d(x) = 1 + x.$$\n\n- 变量 $e$：$e$ 为任意非负整数，可能取值为 $0,1,2,3,\\dots$，其母函数为\n  $$A_e(x) = 1 + x + x^2 + x^3 + \\cdots = \\frac{1}{1 - x}.$$\n\n2. 总母函数\n\n各变量彼此独立，总母函数为上述五个母函数的乘积：\n$$\nA(x) = A_a(x) A_b(x) A_c(x) A_d(x) A_e(x).\n$$\n代入具体表达式：\n$$\nA(x) = \\frac{1}{1 - x^2} \\cdot \\frac{1 - x^4}{1 - x} \\cdot \\frac{1}{1 - x^4} \\cdot (1 + x) \\cdot \\frac{1}{1 - x}.\n$$\n化简得到：\n$$\nA(x) = \\frac{1 + x}{(1 - x)^2 (1 - x^2)}.\n$$\n注意到 $1 - x^2 = (1 - x)(1 + x)$，于是\n$$\nA(x) = \\frac{1 + x}{(1 - x)^2 (1 - x)(1 + x)} = \\frac{1}{(1 - x)^3}.\n$$\n\n3. 读出系数\n\n已知幂级数展开公式\n$$\n\\frac{1}{(1 - x)^3} = \\sum_{n=0}^{\\infty} \\binom{n + 3 - 1}{3 - 1} x^n = \\sum_{n=0}^{\\infty} \\binom{n + 2}{2} x^n.\n$$\n因此，$A(x)$ 中 $x^n$ 的系数为\n$$\n\\binom{n + 2}{2}.\n$$\n\n4. 结论\n\n满足全部条件的非负整数解的个数为\n$$\n\\binom{n + 2}{2}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "求方程 $a+b+c+d+e=n$ 在给定约束下非负整数解的个数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "采用母函数方法：各变量独立构造母函数，相乘得总母函数，从中读取 $x^n$ 的系数"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "核心思路",
+          "node_content": "分别为 $a,b,c,d,e$ 构造满足约束的取值母函数"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "变量 $a$（偶数）：$A_a(x)=1+x^2+x^4+\\cdots=\\dfrac{1}{1-x^2}$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "变量 $b$（$0\\le b\\le3$）：$A_b(x)=1+x+x^2+x^3=\\dfrac{1-x^4}{1-x}$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "变量 $c$（4 的倍数）：$A_c(x)=1+x^4+x^8+\\cdots=\\dfrac{1}{1-x^4}$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "变量 $d$（$0\\le d\\le1$）：$A_d(x)=1+x$； 变量 $e$（任意非负）：$A_e(x)=1+x+x^2+\\cdots=\\dfrac{1}{1-x}$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "总母函数为各变量母函数乘积：$A(x)=A_aA_bA_cA_dA_e$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "代入并化简：$A(x)=\\dfrac{1}{1-x^2}\\cdot\\dfrac{1-x^4}{1-x}\\cdot\\dfrac{1}{1-x^4}\\cdot(1+x)\\cdot\\dfrac{1}{1-x}=\\dfrac{1}{(1-x)^3}$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "利用公式：$\\dfrac{1}{(1-x)^3}=\\sum\\limits_{n=0}^{\\infty}\\binom{n+2}{2}x^n$，系数 $[x^n]=\\binom{n+2}{2}$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "最终答案",
+          "node_content": "满足条件的非负整数解个数为 $\\displaystyle \\binom{n+2}{2}$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定整体方法"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "拆分为各变量"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "构造 $a$ 的母函数"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "构造 $b$ 的母函数"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N3",
+          "target": "N6",
+          "edge_content": "构造 $c$ 的母函数"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N3",
+          "target": "N7",
+          "edge_content": "构造 $d,e$ 的母函数"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N4",
+          "target": "N8",
+          "edge_content": "参与乘积"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N5",
+          "target": "N8",
+          "edge_content": "参与乘积"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N6",
+          "target": "N8",
+          "edge_content": "参与乘积"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "参与乘积"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "代入并化简"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "用展开公式读取系数"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "得到解的个数"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 3,
+    "chapter_name": "母函数",
+    "difficulty": 5,
+    "problem_content": "有一边长为 $n$ 的大等边三角形，其内部的若干线段将其划分为边长为 1 的小等边三角形；右图展示了 $n=4$ 时的情形。从左下角（图中的点 $A$）出发，沿大等边三角形及其内部线段行走至右下角（图中的点 $B$），过程中仅允许向右、右上或右下走。设不同的路线数目为 $a_n$，求数列 $\\{a_n\\}$ 的母函数，并化简至封闭形式。",
+    "problem_solution": "设边长为 $n$ 的大等边三角形内部以单位小等边三角形划分。边长为 $n$ 的等边三角形中包含了各个边长为 $i$（$1 \\le i \\le n$）的小三角形，相应的路径数 $\\{a_i\\}$ 也都出现在整体数列 $\\{a_n\\}$ 中。\n\n从整体结构来看，考虑从点 $A$ 到点 $B$ 的路径，按到达 $B$ 之前的最后一个点的位置分类讨论。\n\n1. **递推关系的建立**\n\n设 $n \\ge 1$。从 $A$ 到 $B$ 的路径，最后一步有以下两种情况：\n\n- **来自点 $D$（位于 $B$ 的左侧，底边上）**：\n  \n  在这种情况下，$D$ 与 $B$ 同处于底边，且构成的子图形为边长为 $n-1$ 的等边三角形。从 $A$ 到 $D$ 的路径数为边长为 $n-1$ 的大三角形的路径数，即共有 $a_{n-1}$ 条路径。\n\n- **来自点 $E$（位于 $B$ 的左上方）**：\n  \n  设从 $A$ 出发，最后一次经过底边的位置为点 $C$，且 $AC = i$，其中 $0 \\le i \\le n-1$。则：\n  \n  - 从 $A$ 到 $C$ 的路径：\n    \n    此时可视为边长为 $i$ 的大等边三角形中的路径数，故共有 $a_i$ 条路径。\n  \n  - 从 $C$ 到 $E$ 的路径：\n    \n    从 $C$ 出发，先向右上方走一步到达底边上方的格点，然后在其右侧形成一个边长为 $n-1-i$ 的等边三角形区域。从该点到 $E$ 的路径数等同于边长为 $n-1-i$ 的大三角形的路径数，因此共有 $a_{n-1-i}$ 条路径。\n  \n  因此，对于给定的 $i$，从 $A$ 经 $C$ 再到 $E$ 的路径数为 $a_i a_{n-1-i}$。对所有可能的 $i$ 求和，来自 $E$ 的路径条数总计为\n  $$\n  \\sum_{i=0}^{n-1} a_i a_{n-1-i}.\n  $$\n\n综上，从 $A$ 到 $B$ 的总路径数 $a_n$ 满足递推关系\n$$\n a_n = a_{n-1} + \\sum_{i=0}^{n-1} a_i a_{n-1-i}, \\quad n \\ge 1.\n$$\n记此式为 (1)。\n\n由图形结构可知，当 $n=0$ 时（退化情况，不移动），视作只有 1 条“空路径”，故 $a_0 = 1$。后续母函数推导中将用到此初值。\n\n2. **构造母函数**\n\n记数列 $\\{a_n\\}$ 的母函数为\n$$\n A(x) = \\sum_{n=0}^{\\infty} a_n x^n. \\tag{2}\n$$\n\n先写出 $A(x)^2$ 的展开式：\n$$\n A(x)^2 = \\left(\\sum_{n=0}^{\\infty} a_n x^n\\right)^2\n = \\sum_{n=0}^{\\infty} \\left(\\sum_{i=0}^n a_i a_{n-i}\\right) x^n.\n$$\n因此，\n$$\n A(x)^2 = a_0^2 + \\sum_{n=1}^{\\infty} \\left(\\sum_{i=0}^n a_i a_{n-i}\\right) x^n. \\tag{3}\n$$\n\n接下来，用 (2) 和 (3) 构造与递推式 (1) 相对应的母函数关系。\n\n3. **利用递推式构造方程**\n\n先将 (2) 的两边乘以 $x$，得\n$$\n xA(x) = x \\sum_{n=0}^{\\infty} a_n x^n = \\sum_{n=0}^{\\infty} a_n x^{n+1} = \\sum_{n=1}^{\\infty} a_{n-1} x^n. \\tag{5}\n$$\n\n再将 (3) 的两边乘以 $x$，注意 $a_0 = 1$，有\n$$\n xA(x)^2 = x a_0^2 + x \\sum_{n=1}^{\\infty} \\left(\\sum_{i=0}^n a_i a_{n-i}\\right) x^n\n = x + \\sum_{n=1}^{\\infty} \\left(\\sum_{i=0}^n a_i a_{n-i}\\right) x^{n+1}.\n$$\n将求和指标改写为从 $n=2$ 开始计数可以写为\n$$\n xA(x)^2 = x + \\sum_{n=2}^{\\infty} \\left(\\sum_{k=0}^{n-1} a_k a_{n-1-k}\\right) x^n. \\tag{6}\n$$\n\n由递推关系 (1)，对每个 $n \\ge 1$ 有\n$$\n a_n = a_{n-1} + \\sum_{k=0}^{n-1} a_k a_{n-1-k}.\n$$\n将此式在母函数层面反映出来：对 $n \\ge 1$ 的项求和，得到\n$$\n \\sum_{n=1}^{\\infty} a_n x^n\n = \\sum_{n=1}^{\\infty} a_{n-1} x^n + \\sum_{n=1}^{\\infty} \\left(\\sum_{k=0}^{n-1} a_k a_{n-1-k}\\right) x^n.\n$$\n利用 (5) 和 (6) 中的表达式，有\n$$\n \\sum_{n=1}^{\\infty} a_n x^n = xA(x) + xA(x)^2.\n$$\n另一方面，根据 (2)，\n$$\n \\sum_{n=1}^{\\infty} a_n x^n = A(x) - a_0 = A(x) - 1.\n$$\n因此得到母函数满足的方程\n$$\n xA(x) + xA(x)^2 = A(x) - 1.\n$$\n整理得到关于 $A(x)$ 的二次方程：\n$$\n xA(x)^2 + xA(x) - A(x) + 1 = 0,\n$$\n即\n$$\n xA(x)^2 + (x-1)A(x) + 1 = 0.\n$$\n\n4. **求解母函数的闭式表达式**\n\n将上式视为关于 $A(x)$ 的二次方程：\n$$\n xA(x)^2 + (x-1)A(x) + 1 = 0.\n$$\n判别式为\n$$\n \\Delta = (x-1)^2 - 4x = x^2 - 2x + 1 - 4x = x^2 - 6x + 1.\n$$\n由求根公式可得\n$$\n A(x) = \\frac{-(x-1) \\pm \\sqrt{x^2 - 6x + 1}}{2x}\n = \\frac{1 - x \\pm \\sqrt{x^2 - 6x + 1}}{2x}.\n$$\n\n为了确定符号，注意到母函数在 $x \\to 0$ 时应满足 $A(0) = a_0 = 1$，因此要求\n$$\n \\lim_{x \\to 0} A(x) = 1.\n$$\n检查两种符号的极限行为可知，应取减号分支，即\n$$\n A(x) = \\frac{1 - x - \\sqrt{x^2 - 6x + 1}}{2x}.\n$$\n\n因此，数列 $\\{a_n\\}$ 的母函数化简到封闭形式为\n$$\n A(x) = \\frac{1 - x - \\sqrt{x^2 - 6x + 1}}{2x}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在允许的走法下，从 $A$ 到 $B$ 的路径数为 $a_n$，求其母函数 $A(x)$ 并化为封闭形式"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "从几何结构出发，对“到达 $B$ 前的最后一个点”分类，建立 $a_n$ 的递推关系"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "分支/情况",
+          "node_content": "情况一：最后一步从底边左侧点 $D$ 到 $B$，对应边长为 $n-1$ 的大三角形，路径数为 $a_{n-1}$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "分支/情况",
+          "node_content": "情况二：最后一步从左上方点 $E$ 到 $B$，需按最后一次落在底边的点 $C$ 进行再分类"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "设最后一次在底边上的点为 $C$，$AC=i$（$0\\le i\\le n-1$），则从 $A$ 至 $E$ 的路径数为 $a_i\\cdot a_{n-1-i}$，对所有 $i$ 求和得该情况路径总数 $\\sum_{i=0}^{n-1} a_i a_{n-1-i}$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "合并两种情况：对 $n\\ge1$ 有递推式 $$a_n=a_{n-1}+\\sum_{i=0}^{n-1} a_i a_{n-1-i}$$ 并给出初值 $a_0=1$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "核心思路",
+          "node_content": "构造普通母函数 $$A(x)=\\sum_{n=0}^\\infty a_n x^n$$ 利用卷积结构与递推式在母函数层面建立代数方程"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "利用卷积：$$A(x)^2=\\sum_{n=0}^\\infty\\Big(\\sum_{i=0}^n a_i a_{n-i}\\Big)x^n$$ 从而 $$xA(x)^2=x+\\sum_{n=2}^\\infty\\big(\\sum_{k=0}^{n-1} a_k a_{n-1-k}\\big)x^n$$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "由递推式对 $n\\ge1$ 求和，结合 $$xA(x)=\\sum_{n=1}^\\infty a_{n-1}x^n,\\quad A(x)-1=\\sum_{n=1}^\\infty a_n x^n$$ 得到母函数满足 $$xA(x)+xA(x)^2=A(x)-1$$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "整理为关于 $A(x)$ 的二次方程 $$xA(x)^2+(x-1)A(x)+1=0$$ 判别式为 $\\Delta=x^2-6x+1$，应用求根公式得到 $$A(x)=\\dfrac{1-x\\pm\\sqrt{x^2-6x+1}}{2x}$$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "最终答案",
+          "node_content": "利用 $A(0)=a_0=1$ 选取极限正确的支，即取负号分支，得到封闭形式母函数 $$A(x)=\\frac{1-x-\\sqrt{x^2-6x+1}}{2x}$$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "从路径计数转化为递推建模"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "分类一：最后一步来自 $D$"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "分类二：最后一步来自 $E$"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "按最后一次落在底边的点 $C$ 再细分"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N3",
+          "target": "N6",
+          "edge_content": "贡献 $a_{n-1}$ 项"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "贡献卷积求和项并合并得到递推式"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "在母函数层面处理递推"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "利用卷积得到 $A(x)^2$ 的表达"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N9",
+          "edge_content": "把递推式写成母函数等式"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "代入卷积部分的母函数形式"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "整理得到关于 $A(x)$ 的二次方程并求根"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "用初值条件选择正确根，得到封闭母函数"
+        }
+      ]
+    }
+  }
+]

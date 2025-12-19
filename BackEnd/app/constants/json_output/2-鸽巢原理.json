@@ -1,0 +1,1083 @@
+[
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 2,
+    "problem_content": "有 7 个互不相同的正整数，证明其中至少存在 2 个正整数 $a, b$ 使得 $a + b$ 或 $a - b$ 能被 10 整除。",
+    "problem_solution": "任意正整数的个位数字都在 0 到 9 之间。根据这一点，我们可以根据个位数字构造如下 6 个集合：\n\n$$\n\\{0\\},\\{5\\},\\{1,9\\},\\{2,8\\},\\{3,7\\},\\{4,6\\}\n$$\n\n将这 6 个集合视作鸽巢，将给定的 7 个互不相同正整数的个位数字视作鸽子。由于有 7 个鸽子但仅有 6 个鸽巢，根据鸽巢原理，至少存在一个鸽巢中包含不小于 2 个鸽子，即至少有两个整数的个位数字落在同一个上述集合中。\n\n记这两个整数为 $a$ 和 $b$，下面分情况讨论：\n\n1. **若对应的鸽巢是 $\\{0\\}$ 或 $\\{5\\}$**：  \n   此时 $a$ 和 $b$ 的个位数字均为 0 或均为 5。  \n   - 若个位为 0，则 $a \\equiv 0 \\pmod{10}$ 且 $b \\equiv 0 \\pmod{10}$，于是\n     $$\n     a + b \\equiv 0 + 0 \\equiv 0 \\pmod{10},\\\\\n     a - b \\equiv 0 - 0 \\equiv 0 \\pmod{10},\n     $$\n     即 $a + b$ 和 $a - b$ 都能被 10 整除。  \n   - 若个位为 5，则 $a \\equiv 5 \\pmod{10}$ 且 $b \\equiv 5 \\pmod{10}$，于是\n     $$\n     a + b \\equiv 5 + 5 \\equiv 10 \\equiv 0 \\pmod{10},\\\\\n     a - b \\equiv 5 - 5 \\equiv 0 \\pmod{10},\n     $$\n     同样有 $a + b$ 和 $a - b$ 都能被 10 整除。\n\n2. **若对应的鸽巢是 $\\{1,9\\},\\{2,8\\},\\{3,7\\}$ 或 $\\{4,6\\}$ 中的一个**：  \n   在这些集合中，两个数字要么相同，要么互为 10 的补数（即两数之和为 10）。因此再分两种情况：\n\n   1. **若 $a, b$ 的个位数字相同**：  \n      此时 $a \\equiv b \\pmod{10}$，所以\n      $$\n      a - b \\equiv 0 \\pmod{10},\n      $$\n      即 $a - b$ 能被 10 整除。\n\n   2. **若 $a, b$ 的个位数字不同**：  \n      在上述四个集合中，不同的两个数字必定互为补数，例如 $1$ 与 $9$，$2$ 与 $8$ 等，故它们之和为 $10$。于是有\n      $$\n      a + b \\equiv 10 \\equiv 0 \\pmod{10},\n      $$\n      即 $a + b$ 能被 10 整除。\n\n综上所述，无论鸽巢是哪一个，总能找到两个整数 $a$ 和 $b$，使得 $a + b$ 或 $a - b$ 能被 10 整除，从而命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在 7 个互不相同正整数中，证明存在 $a,b$ 使得 $a+b$ 或 $a-b$ 被 $10$ 整除"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "只看整数的个位数字，用鸽巢原理保证有两数个位落在同一“类别”中"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "按个位构造 6 个集合：$\\{0\\},\\{5\\},\\{1,9\\},\\{2,8\\},\\{3,7\\},\\{4,6\\}$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "7 个互不相同整数 → 7 个不同的个位“鸽子”放入 6 个“鸽巢” → 至少有一个集合中有两个数的个位"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "设这两个整数为 $a,b$，按它们落入的集合分类讨论"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "分支/情况",
+          "node_content": "情况一：$a,b$ 的个位都在 $\\{0\\}$ 或 $\\{5\\}$ 中"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "若个位为 0 或 5，则 $a \\equiv b \\pmod{10}$ 且 $a \\equiv b \\equiv 0,5 \\pmod{10}$，推出 $a+b \\equiv 0, a-b \\equiv 0 \\pmod{10}$，两者都被 10 整除"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "情况二：$a,b$ 的个位在 $\\{1,9\\},\\{2,8\\},\\{3,7\\},\\{4,6\\}$ 中的某一组"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "分支/情况",
+          "node_content": "子情况二-1：$a,b$ 的个位数字相同"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "若个位相同，则 $a \\equiv b \\pmod{10}$，故 $a-b \\equiv 0 \\pmod{10}$，$a-b$ 被 10 整除"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "分支/情况",
+          "node_content": "子情况二-2：$a,b$ 的个位数字不同（在同一组中则必互为 10 的补数）"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "关键结论",
+          "node_content": "个位互为补数 → 个位和为 10 → $a+b \\equiv 10 \\equiv 0 \\pmod{10}$，$a+b$ 被 10 整除"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "最终答案",
+          "node_content": "无论落入哪一集合及子情况，总能找到 $a,b$ 使得 $a+b$ 或 $a-b$ 能被 10 整除，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "转化为个位与鸽巢问题"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "构造个位分类集合"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "应用鸽巢原理"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "选取同一集合中的两数 $a,b$"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "分类一：集合为 $\\{0\\}$ 或 $\\{5\\}$"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N8",
+          "edge_content": "分类二：集合为其余四组"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "推导 $a\\pm b$ 均被 10 整除"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "对子情况：个位相同"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N8",
+          "target": "N11",
+          "edge_content": "对子情况：个位不同互补"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "推出 $a-b$ 被 10 整除"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "推出 $a+b$ 被 10 整除"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N7",
+          "target": "N13",
+          "edge_content": "并入结论"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N10",
+          "target": "N13",
+          "edge_content": "并入结论"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "并入结论"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 4,
+    "problem_content": "将集合 $\\{i \\in \\mathbb{Z} \\mid 1 \\leq i \\leq 326\\}$ 划分为 5 个子集，证明必有一个子集，其中存在一个数可以表示为该子集中两个数的差。",
+    "problem_solution": "设 $S = \\{i \\in \\mathbb{Z} \\mid 1 \\leq i \\leq 326\\}$，将其划分为 5 个两两不相交的子集：\n$$S = A_1 \\cup A_2 \\cup A_3 \\cup A_4 \\cup A_5, \\quad A_i \\cap A_j = \\varnothing \\ (i \\neq j).$$\n\n采用反证法。\n\n假设命题不成立，即存在一种划分，使得对每个 $k = 1, \\dots, 5$，若 $x, y \\in A_k$ 且 $x > y$，则差 $x - y$ 不属于 $A_k$：\n$$x, y \\in A_k,\\ x>y \\implies x-y \\notin A_k.$$\n\n---\n\n1. **第一次应用鸽巢原理：在某个子集中选出 66 个递增元素**\n\n- 由鸽巢原理，至少有一个子集包含\n  $$\\Bigl\\lceil \\frac{326}{5} \\Bigr\\rceil = 66$$\n  个元素。设 $|A_1| \\ge 66$。\n- 从 $A_1$ 中任取 66 个互不相同的元素，并按大小排序：\n  $$A_1' = \\{a_1, a_2, \\dots, a_{66}\\} \\subseteq A_1, \\quad a_1 < a_2 < \\cdots < a_{66}.$$\n\n2. **构造差集 $B, C, D, E$ 逐步“向后”推到 $A_5$**\n\n(1) **构造 $B$，位于 $A_2 \\cup A_3 \\cup A_4 \\cup A_5$ 中**\n\n- 定义\n  $$B = \\{a_i - a_1 \\mid i = 2, \\dots, 66\\}.$$\n- 显然 $|B| = 65$。\n- 对任意 $i \\ge 2$，有 $a_i, a_1 \\in A_1$ 且 $a_i > a_1$，由假设知\n  $$a_i - a_1 \\notin A_1.$$\n  因此 $B \\cap A_1 = \\varnothing$，即\n  $$B \\subseteq A_2 \\cup A_3 \\cup A_4 \\cup A_5.$$\n\n(2) **在 $B$ 中选出属于 $A_2$ 的 17 个元素并构造 $C$**\n\n- $B$ 有 65 个元素，被分入 $A_2, A_3, A_4, A_5$ 四个子集中。由鸽巢原理，至少有一个子集在 $B$ 中包含\n  $$\\Bigl\\lceil \\frac{65}{4} \\Bigr\\rceil = 17$$\n  个元素。不妨设该子集为 $A_2$，即存在\n  $$A_2' = \\{b_1, b_2, \\dots, b_{17}\\} \\subseteq B \\cap A_2.$$\n- 定义\n  $$C = \\{b_i - b_1 \\mid i = 2, \\dots, 17\\}.$$\n  则 $|C| = 16$。\n- 对任意 $i \\ge 2$，$b_i, b_1 \\in A_2$ 且 $b_i > b_1$，由假设\n  $$b_i - b_1 \\notin A_2,$$\n  因而 $C \\cap A_2 = \\varnothing$。\n- 又因为每个 $b_i$ 都来自 $B$，存在指标 $p, q$ 使得\n  $$b_i = a_p - a_1, \\quad b_1 = a_q - a_1,$$\n  于是\n  $$c = b_i - b_1 = (a_p - a_1) - (a_q - a_1) = a_p - a_q.$$\n  其中 $a_p, a_q \\in A_1$ 且 $a_p \\ne a_q$，由假设 $c \\notin A_1$。\n- 因此\n  $$C \\subseteq A_3 \\cup A_4 \\cup A_5.$$\n\n(3) **在 $C$ 中选出属于 $A_3$ 的 6 个元素并构造 $D$**\n\n- $C$ 有 16 个元素，被分入 $A_3, A_4, A_5$ 三个子集中。由鸽巢原理，至少有一个子集在 $C$ 中包含\n  $$\\Bigl\\lceil \\frac{16}{3} \\Bigr\\rceil = 6$$\n  个元素。不妨设该子集为 $A_3$，即存在\n  $$A_3' = \\{c_1, c_2, \\dots, c_6\\} \\subseteq C \\cap A_3.$$\n- 定义\n  $$D = \\{c_i - c_1 \\mid i = 2, \\dots, 6\\}.$$\n  则 $|D| = 5$。\n- 对任意 $i \\ge 2$，$c_i, c_1 \\in A_3$ 且 $c_i > c_1$，由假设\n  $$c_i - c_1 \\notin A_3,$$\n  因而 $D \\cap A_3 = \\varnothing$。\n- 每个 $c_i$ 为某两个 $b$ 元素的差，即\n  $$c_i = b_p - b_q,$$\n  因此\n  $$d = c_i - c_1 = (b_p - b_q) - (b_r - b_s) = b_p - b_q - b_r + b_s.$$\n  由构造可进一步将这些表达式化为 $a_r - a_s$ 的形式，因此所有 $d \\in D$ 都可以表示为 $A_1$ 中某两元素之差，也可以表示为 $A_2$ 中某两元素之差。根据前述假设，它们不属于 $A_1$ 和 $A_2$。再结合 $D \\cap A_3 = \\varnothing$，可知\n  $$D \\subseteq A_4 \\cup A_5.$$\n\n(4) **在 $D$ 中选出属于 $A_4$ 的 3 个元素并构造 $E$**\n\n- $D$ 有 5 个元素，被分入 $A_4, A_5$ 两个子集中。由鸽巢原理，至少有一个子集在 $D$ 中包含\n  $$\\Bigl\\lceil \\frac{5}{2} \\Bigr\\rceil = 3$$\n  个元素。不妨设该子集为 $A_4$，即存在\n  $$A_4' = \\{d_1, d_2, d_3\\} \\subseteq D \\cap A_4.$$\n- 定义\n  $$E = \\{d_2 - d_1,\\ d_3 - d_1\\}.$$\n  则 $|E| = 2$。\n- 由假设，$d_2, d_1 \\in A_4$ 且 $d_2 > d_1$，故 $d_2 - d_1 \\notin A_4$；同理 $d_3 - d_1 \\notin A_4$，因此\n  $$E \\cap A_4 = \\varnothing.$$\n- 另一方面，利用构造链条，可知 $E$ 中任意元素形如\n  $$e = d_i - d_1 = c_p - c_q = b_r - b_s = a_u - a_v,$$\n  即 $e$ 既是 $A_3$ 中两元素之差，又是 $A_2$ 中两元素之差，还是 $A_1$ 中两元素之差。由假设 $e \\notin A_1, e \\notin A_2, e \\notin A_3$。\n- 由 $D \\subseteq A_4 \\cup A_5$ 且 $E \\cap A_4 = \\varnothing$，可得\n  $$E \\subseteq A_5.$$ \n\n---\n\n3. **得到最终矛盾**\n\n- 设\n  $$E = \\{e_1, e_2\\} \\subseteq A_5, \\quad e_1 < e_2.$$\n  定义\n  $$f = e_2 - e_1.$$\n- 由于 $e_2, e_1 \\in A_5$ 且 $e_2 > e_1$，由假设\n  $$f = e_2 - e_1 \\notin A_5.$$\n- 又因为\n  $$f = e_2 - e_1 = (d_3 - d_1) - (d_2 - d_1) = d_3 - d_2,$$\n  且 $d_3, d_2 \\in A_4' \\subseteq A_4$，根据假设\n  $$f \\notin A_4.$$\n- 进一步沿之前的构造向前追溯，$f$ 还能写成 $A_3$ 中某两元素之差、$A_2$ 中某两元素之差以及 $A_1$ 中某两元素之差。因此由同样的假设可知\n  $$f \\notin A_3, \\quad f \\notin A_2, \\quad f \\notin A_1.$$\n- 综上，\n  $$f \\notin A_1,\\ f \\notin A_2,\\ f \\notin A_3,\\ f \\notin A_4,\\ f \\notin A_5,$$\n  即\n  $$f \\notin A_1 \\cup A_2 \\cup A_3 \\cup A_4 \\cup A_5 = S.$$\n\n- 然而，$e_1, e_2 \\in S$ 且 $e_2 > e_1$，所以 $f = e_2 - e_1$ 是正整数。另一方面，由于\n  $$e_2 \\in E \\subset D \\subset C \\subset B \\subset S,$$\n  并且 $S = \\{1, \\dots, 326\\}$，因此 $e_2 \\le 325$（其最大可能值为 $326-1$），从而\n  $$1 \\le f = e_2 - e_1 < e_2 \\le 325.$$\n  于是 $f \\in \\{1, 2, \\dots, 325\\} \\subseteq S$。\n\n- 这就得到矛盾：一方面 $f \\notin S$，另一方面 $f \\in S$。\n\n因此最初的假设不成立。也就是说，在任意将 $S = \\{1, \\dots, 326\\}$ 划分为 5 个子集的方式下，必定存在某个子集，其中的某个元素可以表示为该子集中两个元素的差，命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "将 $S=\\{1,\\dots,326\\}$ 划分为 5 个子集，证明：必有一子集含有“本子集中两数之差”形式的元素"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "用反证法：假设任一子集 $A_k$ 中任意 $x>y$，都有 $x-y\\notin A_k$，然后构造一串差集并最终得到矛盾"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "第一次用鸽巢原理：某个子集（设为 $A_1$）至少有 $\\lceil 326/5\\rceil=66$ 个元素，取递增子序列 $a_1<\\cdots<a_{66}$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "构造 $B=\\{a_i-a_1\\mid i=2,\\dots,66\\}$：由假设 $a_i-a_1\\notin A_1$，故 $B\\subseteq A_2\\cup A_3\\cup A_4\\cup A_5$，且 $|B|=65$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "在 $B$ 中再次用鸽巢原理：$\\lceil 65/4\\rceil=17$，取 $A_2'\\subseteq B\\cap A_2$，构造 $C=\\{b_i-b_1\\}$，由“差不在本集”假设与追溯到 $A_1$，得 $C\\subseteq A_3\\cup A_4\\cup A_5$，$|C|=16$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "在 $C$ 中用鸽巢原理：$\\lceil 16/3\\rceil=6$，取 $A_3'\\subseteq C\\cap A_3$，构造 $D=\\{c_i-c_1\\}$，再利用“差不在本集”假设并追溯表示为 $A_1,A_2$ 中两数之差，得 $D\\subseteq A_4\\cup A_5$，$|D|=5$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "在 $D$ 中用鸽巢原理：$\\lceil 5/2\\rceil=3$，取 $A_4'\\subseteq D\\cap A_4$，构造 $E=\\{d_2-d_1, d_3-d_1\\}$，由多次追溯知其既是 $A_1,A_2,A_3$ 中两数之差，又不在 $A_4$，故 $E\\subseteq A_5$，$|E|=2$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "设 $E=\\{e_1,e_2\\}\\subseteq A_5$ 且 $e_1<e_2$，令 $f=e_2-e_1$，由假设知 $f\\notin A_5$；又由构造链条可写成 $A_4,A_3,A_2,A_1$ 中两元素之差，故 $f\\notin A_1\\cup A_2\\cup A_3\\cup A_4\\cup A_5=S$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "另一方面，$e_1,e_2\\in S$ 且 $e_2>e_1$，故 $f=e_2-e_1$ 为正整数且 $1\\le f<e_2\\le 325$，所以 $f\\in\\{1,\\dots,325\\}\\subseteq S$，与 $f\\notin S$ 矛盾"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "最终答案",
+          "node_content": "反证假设不成立：任意将 $S$ 划分为 5 个子集，总能在某个子集中找到一个元素，可表示为该子集中两元素之差，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "应用鸽巢原理选大子集"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "在 $A_1$ 内构造差集 $B$，排除 $A_1$"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "在 $B$ 内用鸽巢原理并构造 $C$，排除 $A_1,A_2$"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "在 $C$ 内用鸽巢原理并构造 $D$，排除 $A_1,A_2,A_3$"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "在 $D$ 内用鸽巢原理并构造 $E$，排除 $A_1,A_2,A_3,A_4$"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "在 $A_5$ 中再取差 $f$，推出 $f\\notin S$"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "利用取值范围证明 $f\\in S$，形成矛盾"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "由矛盾否定假设，得出原命题"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 3,
+    "problem_content": "$(m + 1)$ 行、$\\left[ m \\displaystyle \\binom{m+1}{2} + 1 \\right]$ 列的方格，用 $m$ 种颜色给每个方格染色，证明必能找出一个由方格组成的矩形，其四个顶点所在的方格颜色相同。",
+    "problem_solution": "设方格阵列共有 $R = m+1$ 行、$C = m \\binom{m+1}{2} + 1$ 列，并用 $m$ 种颜色给每个方格染色。\n\n1. **每一列中存在同色方格对**  \n   在任意一列中，有 $m+1$ 个方格、仅 $m$ 种颜色。根据鸽巢原理（$m+1$ 个“鸽子”对应方格、$m$ 个“鸽巢”对应颜色），必有至少一种颜色在该列中出现至少两次。  \n   换言之，在每一列中，至少存在一个同色的垂直方格对，即存在两行 $r_a \\ne r_b$，使得同一列中行 $r_a$ 和行 $r_b$ 的方格颜色相同。\n\n2. **确定“鸽笼”和“鸽子”的数量**  \n   将“同色垂直方格对的类型”定义为一个鸽笼。一个类型由两部分确定：\n   - 一种颜色；\n   - 一对行号 $(r_a, r_b)$，其中 $1 \\le r_a < r_b \\le m+1$。\n\n   因此：\n   - 颜色的可能数为 $m$；\n   - 行对的可能数为从 $m+1$ 行中选出 2 行，即 $\\binom{m+1}{2}$ 种。\n\n   所以鸽笼总数 $K$ 为：\n   $$K = m \\binom{m+1}{2}.$$\n\n   对于每一列，由上一步知在该列中至少存在一个同色垂直方格对，因此每一列至少对应一种“同色垂直方格对的类型”。我们将每一列视为一只鸽子。列的总数为\n   $$P = C = m \\binom{m+1}{2} + 1.$$\n\n3. **应用鸽巢原理得到两个相同类型的列**  \n   由于\n   $$P = K + 1 > K,$$\n   鸽子总数严格大于鸽笼总数。根据鸽巢原理，必存在至少两只鸽子（两列），记为第 $j_1$ 列和第 $j_2$ 列（$j_1 \\ne j_2$），被分配到同一个鸽笼中。\n\n   这意味着存在某种颜色 $i^*$ 以及一对行号 $(r_a, r_b)$，使得：\n   - 在列 $j_1$ 中，方格 $(r_a, j_1)$ 和 $(r_b, j_1)$ 的颜色均为 $i^*$；\n   - 在列 $j_2$ 中，方格 $(r_a, j_2)$ 和 $(r_b, j_2)$ 的颜色也均为 $i^*$。\n\n4. **构造四角同色的矩形**  \n   由上述结论可知，以下四个方格：\n   $$ (r_a, j_1), \\quad (r_b, j_1), \\quad (r_a, j_2), \\quad (r_b, j_2) $$\n   组成一个矩形，并且这四个方格的颜色全部为 $i^*$。因此，在该方格阵列中必定存在一个四个顶点方格颜色相同的矩形。\n\n命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在 $(m+1)\\times\\left(m\\binom{m+1}{2}+1\\right)$ 方格阵中，用 $m$ 色染色，证明必存在四个顶点同色的矩形"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "两次应用鸽巢原理：先对列内颜色，再对整列的“同色行对类型”，逼出两列在同一行对、同一颜色上重合"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "任意一列：$m+1$ 个方格、仅 $m$ 种颜色，故存在至少一对行 $(r_a,r_b)$ 使该列上两格同色（列内同色垂直方格对）"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "核心思路",
+          "node_content": "把“列内同色垂直方格对的类型”定义为鸽笼：由“颜色 + 行对 $(r_a,r_b)$”确定"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "鸽笼总数：颜色有 $m$ 种，行对 $(r_a,r_b)$ 有 $\\binom{m+1}{2}$ 种，因此类型数 $K=m\\binom{m+1}{2}$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "每一列至少含有一个同色垂直方格对，因此每一列可归入某一“类型”；列的总数 $P=m\\binom{m+1}{2}+1=K+1$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "由 $P>K$，按鸽巢原理：存在两列（记为第 $j_1,j_2$ 列）被分到同一类型中"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "同一类型含义：存在某颜色 $i^*$ 与某行对 $(r_a,r_b)$，使得在列 $j_1$ 与列 $j_2$ 上，行 $r_a$ 与行 $r_b$ 的方格颜色都为 $i^*$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "最终答案",
+          "node_content": "方格 $(r_a,j_1),(r_b,j_1),(r_a,j_2),(r_b,j_2)$ 构成一个矩形，四角颜色皆为 $i^*$，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "整体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "先在单列中用鸽巢原理"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "再在列间构造鸽巢结构"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "用列内同色对作为类型基础"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "统计类型总数"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N3",
+          "target": "N6",
+          "edge_content": "保证每列至少一个类型"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "比较列数与类型数"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "第二次鸽巢原理得两列同类型"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "解释“同类型”含义"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "四点构成同色矩形"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 3,
+    "problem_content": "设有正整数列 $\\{a_1, a_2, \\ldots, a_{77}\\}$，其中任意连续 $7$ 项之和不大于 $12$，证明数列中存在连续若干项之和为 $22$。",
+    "problem_solution": "记\n$$S_i = \\sum_{j=1}^{i} a_j \\quad (i = 1,2,\\ldots,77),$$\n并约定 $S_0 = 0$。则 $S_i$ 构成一个严格递增的正整数列，并有\n$$\nS_0 = 0, \\quad S_1 = a_1, \\quad S_2 = a_1 + a_2, \\ \\ldots, \\ S_{77} = a_1 + a_2 + \\cdots + a_{77}.\n$$\n\n由任意连续 $7$ 项之和不大于 $12$ 可得，对一切满足 $0 \\le i \\le 70$ 的整数 $i$，有\n$$\nS_{i+7} - S_i = a_{i+1} + a_{i+2} + \\cdots + a_{i+7} \\le 12.\n$$\n因此，$S_i$ 是严格递增序列，且在每一个长度为 $7$ 的区间上，部分和的增加不超过 $12$。于是整个数列的总和满足\n$$\nS_{77} = a_1 + a_2 + \\cdots + a_{77} \\le 12 \\times 11 = 132,\n$$\n从而\n$$\n0 = S_0 < S_1 < S_2 < \\cdots < S_{77} \\le 132.\n$$\n\n接下来构造两个集合：\n\n- $$A = \\{S_0, S_1, S_2, \\ldots, S_{77}\\},$$\n- $$B = \\{S_0 + 22, S_1 + 22, S_2 + 22, \\ldots, S_{77} + 22\\}.$$\n\n可以看到：\n\n1. $A$ 中共有 $78$ 个元素，且它们都是介于 $0$ 与 $132$ 之间的整数，因此\n   $$|A| = 78, \\quad A \\subseteq \\{0,1,2,\\ldots,132\\}.$$\n2. $B$ 中的每个元素形如 $S_i + 22$，所以 $B$ 中元素范围介于 $22$ 与 $132+22=154$ 之间，且同样有 $78$ 个元素：\n   $$|B| = 78, \\quad B \\subseteq \\{22,23,\\ldots,154\\}.$$\n\n因此，$A \\cup B$ 至多包含 $0$ 到 $154$ 的整数，即\n$$\nA \\cup B \\subseteq \\{0,1,2,\\ldots,154\\},\n$$\n而右侧集合共有 $155$ 个元素。\n\n但是 $A$ 和 $B$ 本身各有 $78$ 个元素，所以\n$$\n|A| + |B| = 78 + 78 = 156.\n$$\n将 $A \\cup B$ 视作从 $\\{0,1,2,\\ldots,154\\}$ 中取出的若干整数的集合，根据鸽巢原理，在 $155$ 个可能的整数位置中放入 $156$ 个元素（$A$ 与 $B$ 的元素）时，必然有某个整数被至少两个元素占据。换言之，必存在一对指标 $i,j$ 使得\n$$\nS_i = S_j + 22.\n$$\n这等价于\n$$\nS_i - S_j = 22.\n$$\n\n由前缀和的定义，有\n$$\nS_i - S_j = (a_1 + a_2 + \\cdots + a_i) - (a_1 + a_2 + \\cdots + a_j) = a_{j+1} + a_{j+2} + \\cdots + a_i.\n$$\n因此，存在一段连续的若干项 $a_{j+1}, a_{j+2}, \\ldots, a_i$ 之和为\n$$\n a_{j+1} + a_{j+2} + \\cdots + a_i = 22.\n$$\n\n从而证明了：在给定的正整数列中，必然存在连续若干项之和等于 $22$。命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在正整数列 $\\{a_1,\\ldots,a_{77}\\}$ 中，在“任意连续 $7$ 项之和 $\\le12$”条件下，证明存在一段连续若干项之和为 $22$"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "引入前缀和 $S_i=\\sum_{j=1}^i a_j$，把“连续若干项之和为 $22$”转化为“两个前缀和之差为 $22$”"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "由 $a_i>0$ 得到 $0=S_0<S_1<\\cdots<S_{77}$，是严格递增的正整数列"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "利用任意连续 $7$ 项：$S_{i+7}-S_i\\le12\\ (0\\le i\\le70)$，推出每 $7$ 项总增量不超过 $12$，从而 $S_{77}\\le12\\times11=132$，即 $0=S_0<\\cdots<S_{77}\\le132$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "构造平移后的前缀和集合，用鸽巢原理在区间整数点上制造“差为 $22$”的两数"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "定义集合 $A=\\{S_0,S_1,\\ldots,S_{77}\\}$，有 $|A|=78$ 且 $A\\subseteq\\{0,1,\\ldots,132\\}$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "定义集合 $B=\\{S_0+22,S_1+22,\\ldots,S_{77}+22\\}$，有 $|B|=78$ 且 $B\\subseteq\\{22,23,\\ldots,154\\}$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "两集合并集满足 $A\\cup B\\subseteq\\{0,1,\\ldots,154\\}$，右侧仅有 $155$ 个整数，但 $|A|+|B|=156$，故由鸽巢原理必有某个整数同时属于 $A$ 和 $B$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "存在指标 $i,j$ 使得 $S_i=S_j+22$，即 $S_i-S_j=22$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "由前缀和定义：$S_i-S_j=a_{j+1}+a_{j+2}+\\cdots+a_i$，从而存在一段连续若干项的和为 $22$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "最终答案",
+          "node_content": "在给定条件下，数列中必存在连续若干项之和等于 $22$，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "转化为前缀和差"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "利用正整数性质"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "利用“任意连续 7 项”限制求上界"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "准备使用鸽巢原理"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "得到前缀和取值范围"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "构造原前缀和集合"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N5",
+          "target": "N7",
+          "edge_content": "构造平移后前缀和集合"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N8",
+          "edge_content": "统计元素个数与范围"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "统计元素个数与范围"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "应用鸽巢原理得出等值关系"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "还原为连续项和"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "得到所求结论"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 2,
+    "problem_content": "证明或证伪：序列 $\\{23, 2323, 232323, \\ldots\\}$ 中存在一个数能被 $233$ 整除。\n\n序列中的第 $n$ 个数 $a_n$ 可以表示为：\n$$a_n = \\sum_{i=0}^{n-1} 23 \\times 100^{i} = 23 \\times \\frac{100^{n} - 1}{99}$$",
+    "problem_solution": "记序列的第 $n$ 个数为\n$$a_n = \\sum_{i=0}^{n-1} 23 \\times 100^{i} = 23 \\times \\frac{100^{n} - 1}{99}.$$  \n\n1. **应用鸽巢原理构造差值**  \n   取序列的前 $234$ 项：$a_1, a_2, \\ldots, a_{234}$。  \n   每个 $a_k$ 在模 $233$ 意义下的余数只有 $233$ 种可能，即 $0, 1, 2, \\ldots, 232$。  \n   因为有 $234$ 个数和 $233$ 个可能的余数，根据鸽巢原理，必然存在两个指标 $i, j$，满足 $1 \\le j < i \\le 234$，使得 $a_i$ 与 $a_j$ 在模 $233$ 意义下的余数相同。  \n   因此：\n   $$a_i \\equiv a_j \\pmod{233} \\quad\\Rightarrow\\quad a_i - a_j \\equiv 0 \\pmod{233},$$\n   即 $a_i - a_j$ 能被 $233$ 整除。\n\n2. **将差值与序列中的某一项联系起来**  \n   利用 $a_n$ 的表达式，整理 $a_i - a_j$：\n   $$\n   a_i - a_j = 23 \\times \\frac{100^{i} - 100^{j}}{99}\n              = 23 \\times \\frac{100^{j}(100^{i-j} - 1)}{99}.\n   $$\n   而\n   $$\n   a_{i-j} = 23 \\times \\frac{100^{i-j} - 1}{99},\n   $$\n   因此\n   $$\n   a_i - a_j = 100^{j} a_{i-j}.\n   $$\n\n3. **利用互素性得到结论**  \n   已知 $233$ 为质数，且 $100$ 与 $233$ 互质（因为 $233$ 不整除 $100$），从而 $100^{j}$ 也与 $233$ 互质，故 $100^{j}$ 不能被 $233$ 整除。  \n   由于 $a_i - a_j$ 能被 $233$ 整除，又有\n   $$a_i - a_j = 100^{j} a_{i-j},$$\n   且 $\\gcd(100^{j}, 233) = 1$，因此 $a_{i-j}$ 必须能被 $233$ 整除。\n\n4. **结论**  \n   在序列 $\\{23, 2323, 232323, \\ldots\\}$ 中，存在某一项 $a_{i-j}$ 能被 $233$ 整除，命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "证明序列 $a_n=23\\cdot\\dfrac{100^n-1}{99}$ 中存在一项能被 $233$ 整除"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "考虑前若干项在模 $233$ 下的余数，用鸽巢原理得到两项同余，再利用差值结构和互素性推出某一项可被 $233$ 整除"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "取 $a_1,\\dots,a_{234}$，它们模 $233$ 的余数只有 $233$ 种，故必有 $1\\le j<i\\le 234$ 使 $a_i\\equiv a_j\\pmod{233}$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "由 $a_i\\equiv a_j\\pmod{233}$ 得 $a_i-a_j\\equiv 0\\pmod{233}$，即 $a_i-a_j$ 可被 $233$ 整除"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "利用通项公式：$a_i-a_j=23\\dfrac{100^i-100^j}{99}=23\\dfrac{100^j(100^{i-j}-1)}{99}=100^j a_{i-j}$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "因 $233$ 为质数且不整除 $100$，有 $\\gcd(100,233)=1$，从而 $\\gcd(100^j,233)=1$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "已知 $233\\mid(a_i-a_j)$ 且 $a_i-a_j=100^j a_{i-j}$，又 $\\gcd(100^j,233)=1$，故必有 $233\\mid a_{i-j}$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "最终答案",
+          "node_content": "存在某一项 $a_{i-j}$ 能被 $233$ 整除，序列中确有元素被 $233$ 整除，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定整体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "应用鸽巢原理找同余两项"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "由同余得到差值可被 $233$ 整除"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "代入通项并化简差值结构"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N2",
+          "target": "N6",
+          "edge_content": "分析 $100$ 与 $233$ 的互素性"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N7",
+          "edge_content": "结合差值形式与整除关系"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "利用互素性推出因子整除性"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "得出存在性结论"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 2,
+    "problem_content": "有 $101$ 个正整数，其和为 $300$，证明其中某些数之和恰好为 $200$。",
+    "problem_solution": "记这些正整数为 $a_i\\ (1\\leq i\\leq 101)$，记\n$$S_i = \\sum_{j=1}^{i} a_j.$$  \n\n考虑 $S_i \\bmod 100$ 的余数，共有 $101$ 个数 $S_1,S_2,\\dots,S_{101}$，而余数只有 $0,1,\\dots,99$ 共 $100$ 种可能。根据鸽巢原理，必然存在 $i \\neq j\\ (1\\leq j<i\\leq 101)$，使得 $S_i$ 和 $S_j$ 模 $100$ 的余数相同，即\n$$S_i \\equiv S_j \\pmod{100},$$\n从而\n$$S_i - S_j \\text{ 可以被 } 100 \\text{ 整除}.$$  \n\n又因为\n$$S_{101} = \\sum_{k=1}^{101} a_k = 300,$$\n故 $0 < S_i - S_j < 300$。于是 $S_i - S_j$ 是小于 $300$ 的正整数且为 $100$ 的倍数，只可能取 $100$ 或 $200$。再加上形式上的 $0$ 情况，一并分情况讨论：\n\n1. 情况一：$S_i - S_j = a_{j+1} + a_{j+2} + \\cdots + a_i = 0$。  \n   由于每个 $a_k$ 都是正整数，上式不可能成立，故此种情况与已知条件矛盾，排除。\n\n2. 情况二：$S_i - S_j = a_{j+1} + a_{j+2} + \\cdots + a_i = 100$。  \n   由\n   $$S_{101} = S_j + (a_{j+1} + \\cdots + a_i) + (a_{i+1} + \\cdots + a_{101}) = 300$$\n   得\n   $$S_j + 100 + (a_{i+1} + \\cdots + a_{101}) = 300,$$\n   即\n   $$S_j + (a_{i+1} + \\cdots + a_{101}) = 200.$$  \n   也就是说，数集 $\\{a_1,\\dots,a_j,a_{i+1},\\dots,a_{101}\\}$ 中这些数的和恰好为 $200$。\n\n3. 情况三：$S_i - S_j = a_{j+1} + a_{j+2} + \\cdots + a_i = 200$。  \n   此时，$a_{j+1} + a_{j+2} + \\cdots + a_i = 200$，因此从 $a_{j+1}$ 到 $a_i$ 的这一部分数之和恰好为 $200$。\n\n在情况二和情况三中，都能够得到一组由原来这 $101$ 个正整数组成的子集，使其和恰好为 $200$。因此，命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "已知 $101$ 个正整数和为 $300$，证明存在若干个数之和为 $200$ 的子集"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "引入前缀和 $S_i=\\sum_{j=1}^{i}a_j$，利用模 $100$ 与鸽巢原理得到“连续一段和是 $100$ 的倍数”"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "考虑 $S_1,\\dots,S_{101}$ 在模 $100$ 下的余数，共 $101$ 个数、$100$ 个余数，故存在 $i>j$ 使得 $S_i\\equiv S_j\\pmod{100}$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "$S_i\\equiv S_j\\pmod{100}\\Rightarrow S_i-S_j$ 是 $100$ 的倍数，且 $0<S_i-S_j<300$（因 $S_{101}=300$，且各 $a_k>0$）"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "由 $0<S_i-S_j<300$ 且 $100\\mid(S_i-S_j)$，可得 $S_i-S_j\\in\\{100,200\\}$（形式上可加 $0$ 情形便于分类）"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "分支/情况",
+          "node_content": "情况一：$S_i-S_j=0=a_{j+1}+\\cdots+a_i$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "因每个 $a_k$ 为正整数，不可能有 $a_{j+1}+\\cdots+a_i=0$，故该情况排除"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "情况二：$S_i-S_j=100=a_{j+1}+\\cdots+a_i$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "由 $S_{101}=S_j+(a_{j+1}+\\cdots+a_i)+(a_{i+1}+\\cdots+a_{101})=300$ 得 $S_j+(a_{i+1}+\\cdots+a_{101})=200$，即选取 $\\{a_1,\\dots,a_j,a_{i+1},\\dots,a_{101}\\}$ 的和为 $200$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "分支/情况",
+          "node_content": "情况三：$S_i-S_j=200=a_{j+1}+\\cdots+a_i$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "直接得到从 $a_{j+1}$ 到 $a_i$ 这一段连续若干数之和为 $200$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "最终答案",
+          "node_content": "在情况二或情况三中，均可从原 $101$ 个正整数中选出若干个数，其和恰为 $200$，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "设前缀和并确定整体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "应用鸽巢原理找同余前缀和"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "由同余得到差是 $100$ 的倍数且有上界"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "限定差值的可能取值"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "分类一（形式上的 $0$ 情况）"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N8",
+          "edge_content": "分类二：差为 $100$"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N5",
+          "target": "N10",
+          "edge_content": "分类三：差为 $200$"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "利用正整数条件排除"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "由总和为 $300$ 构造和为 $200$ 的子集"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "直接得到连续一段和为 $200$"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N7",
+          "target": "N12",
+          "edge_content": "综合三种情况"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N9",
+          "target": "N12",
+          "edge_content": "情况二得到所需子集"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "情况三得到所需子集"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 3,
+    "problem_content": "设 $S = \\{1, 2, \\ldots, 10^6\\}$，$A \\subseteq S$，且 $|A| = 101$。证明：总能找到 $B \\subseteq S$，满足 $|B| = 100$，并且集合\n$$\n\\{a + b \\mid a \\in A, b \\in B\\}\n$$\n中包含恰好 $|A| \\cdot |B| = 10100$ 个元素。",
+    "problem_solution": "记 $A = \\{a_1, a_2, \\ldots, a_{101}\\}$，设 $B = \\{b_1, b_2, \\ldots, b_{100}\\}$，依次确定 $b_i$ 的取值，使得所有和 $a_i + b_j$ 互不相同。\n\n1. **选择 $b_1$**  \n   $b_1$ 可以在 $S$ 中任意取值。\n\n2. **选择 $b_2$**  \n   为避免出现重复的和，需要对任意 $i, j$（其中 $i \\neq j$）有\n   $$\n   a_i + b_1 \\neq a_j + b_2.\n   $$\n   等价地，这要求\n   $$\n   b_2 \\neq b_1 + (a_i - a_j).\n   $$\n   对于每一对有序下标 $(i, j)$，$i \\neq j$，上式给出至多一个被禁止的取值。这样的有序对共有 $101 \\times 100 = 10100$ 个，因此由条件 $a_i + b_1 = a_j + b_2$ 导致的被禁止取值至多有 $10100$ 个。\n\n   另一方面，当 $a_i = a_j$ 时，上式退化为 $b_2 \\neq b_1$，这只是 $b_2 = b_1$ 这一种情形，需要单独排除。因此，相比总共 $10^6$ 个可能值，$b_2$ 的可选值至少有\n   $$\n   10^6 - 10101\n   $$\n   个，因此一定存在可行的 $b_2$。\n\n3. **选择 $b_3$**  \n   为保证新的和也互不重复，要求：\n   - 对所有 $i \\neq j$，有 $a_i + b_1 \\neq a_j + b_3$；\n   - 对所有 $i \\neq j$，有 $a_i + b_2 \\neq a_j + b_3$。\n\n   这等价于同时满足\n   $$\n   b_3 \\neq b_1 + (a_i - a_j), \\quad b_3 \\neq b_2 + (a_i - a_j).\n   $$\n   若存在 $i, j$ 使得 $b_3 = b_1 + (a_i - a_j)$，或者存在 $i, j$ 使得 $b_3 = b_2 + (a_i - a_j)$，则 $b_3$ 落入被禁止的取值。由类似计数，对每个 $t \\in \\{1,2\\}$，从等式 $a_i + b_t = a_j + b_3$ 得到的被禁止取值至多有 $101 \\times 100$ 个，因此总的此类被禁止取值数不超过\n   $$\n   2 \\times 101 \\times 100 = 20200.\n   $$\n   再排除 $b_3 = b_1$ 或 $b_3 = b_2$ 的两种取值，可行的 $b_3$ 至少有\n   $$\n   10^6 - 20202\n   $$\n   个，因此可以选到满足条件的 $b_3$。\n\n4. **一般步骤，选择 $b_k$（$4 \\le k \\le 100$）**  \n   已经选定 $b_1, b_2, \\ldots, b_{k-1}$，并保证所有 $a_i + b_t$（$1 \\le t \\le k-1$，$1 \\le i \\le 101$）两两不同。现在选择 $b_k$，需要保证对所有 $t < k$ 和所有 $i \\neq j$，均有\n   $$\n   a_i + b_t \\neq a_j + b_k,\n   $$\n   即\n   $$\n   b_k \\neq b_t + (a_i - a_j).\n   $$\n   对固定的 $t < k$，方程 $a_i + b_t = a_j + b_k$ 在 $i \\neq j$ 时至多产生 $101 \\times 100$ 个被禁止的取值。因此，当 $t$ 从 $1$ 取到 $k-1$ 时，被禁止的取值总数至多为\n   $$\n   (k-1) \\times 101 \\times 100.\n   $$\n   此外，还需要排除 $b_k = b_t$（$t < k$）的情形，共有 $k-1$ 种。因此，$b_k$ 的可选值至少有\n   $$\n   10^6 - \\bigl((k-1) \\times 101 \\times 100 + (k-1)\\bigr).\n   $$\n\n5. **对 $b_{100}$ 的计数**  \n   当 $k = 100$ 时，上式给出被禁止的取值上界为\n   $$\n   (100-1) \\times 101 \\times 100 + (100-1)\n   = 99 \\times 101 \\times 100 + 99\n   = 999900 + 99\n   = 999999.\n   $$\n   因此 $b_{100}$ 的可选值至少有\n   $$\n   10^6 - 999999 = 1\n   $$\n   个，说明至少存在一种合法的取值可以选择。于是我们可以依次选出 $b_1, b_2, \\ldots, b_{100}$，构成集合 $B$。\n\n在上述构造过程中，每加入一个新的 $b_k$，都保证所有新出现的和 $a_i + b_k$ 不与之前任何 $a_j + b_t$（$t < k$）相同。因此，最终得到的所有和\n$$\n\\{a_i + b_j \\mid 1 \\le i \\le 101,\\ 1 \\le j \\le 100\\}\n$$\n两两不同，总数为 $101 \\times 100 = 10100$。因此，确有满足条件的 $B \\subseteq S$，命题得证。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "给定 $A\\subseteq S=\\{1,2,\\dots,10^6\\}$, $|A|=101$，构造 $B\\subseteq S$, $|B|=100$，使所有和 $a+b$ ($a\\in A,b\\in B$) 互不相同，总数 $10100$"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "按顺序构造 $B=\\{b_1,\\dots,b_{100}\\}$，在选每个 $b_k$ 时用“禁止取值计数”法，保证所有 $a_i+b_j$ 两两不同"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "构造不变式：对任意已选 $b_1,\\dots,b_{k-1}$，集合 $\\{a_i+b_t\\mid 1\\le i\\le 101,1\\le t<k\\}$ 中元素两两不同"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "选择 $b_1$：在 $S$ 中任取即可；此时所有 $a_i+b_1$ 显然互不相同"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "选择 $b_2$：避免 $a_i+b_1=a_j+b_2$ ($i\\ne j$)，即 $b_2\\ne b_1+(a_i-a_j)$；至多产生 $10100$ 个禁止值，再加上 $b_2\\ne b_1$，共至多 $10101$ 个禁止值，故有可行 $b_2$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "关键结论",
+          "node_content": "选择 $b_3$ 的思路推广：对每个已选 $b_t$ ($t<3$)，条件 $a_i+b_t\\ne a_j+b_3$ ($i\\ne j$) 给出至多 $101\\times100$ 个禁止值，再加上 $b_3\\ne b_t$ 的 $2$ 个禁止值，总禁止值 $\\le 2\\cdot101\\cdot100+2$，仍远小于 $10^6$，故可选到适合的 $b_3$"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "核心思路",
+          "node_content": "一般步骤（数学归纳式描述）：已选 $b_1,\\dots,b_{k-1}$ 满足不变式，选取 $b_k$ 时排除所有会导致新和与旧和相等的取值"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "对一般 $k$，对每个 $t<k$，等式 $a_i+b_t=a_j+b_k$ ($i\\ne j$) 至多给出 $101\\times100$ 个禁止的 $b_k$ 值；对所有 $t<k$ 合计至多 $(k-1)\\cdot101\\cdot100$ 个禁止值"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "此外排除 $b_k=b_t$ ($t<k$) 的 $k-1$ 个取值，所以 $b_k$ 的可选值至少为 $10^6-((k-1)\\cdot101\\cdot100+(k-1))$，从而总能选到合适的 $b_k$ 使不变式保持"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "对 $k=100$，禁止值上界为 $(100-1)\\cdot101\\cdot100+(100-1)=999999$，因此在 $S$ 中仍至少有 $1$ 个可选值作为 $b_{100}$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "最终答案",
+          "node_content": "依次构造出 $B=\\{b_1,\\dots,b_{100}\\}$，使得所有 $a_i+b_j$ 两两不同，总数为 $101\\cdot100=10100$，从而存在满足条件的 $B\\subseteq S$，命题得证"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "选用构造+计数策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "建立不变式"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "初始构造 $b_1$"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "构造 $b_2$ 的具体计数"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N3",
+          "target": "N6",
+          "edge_content": "构造 $b_3$ 的具体计数"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N3",
+          "target": "N7",
+          "edge_content": "推广为一般步骤"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "对一般 $k$ 统计等式带来的禁止值"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N9",
+          "edge_content": "加入去重条件 $b_k\\ne b_t$，得出可选范围"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N8",
+          "target": "N10",
+          "edge_content": "代入 $k=100$ 得具体上界"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "结合得到 $b_{100}$ 至少一个可选值"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N4",
+          "target": "N11",
+          "edge_content": "作为归纳起点的一部分"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N5",
+          "target": "N11",
+          "edge_content": "归纳步骤的一部分"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N6",
+          "target": "N11",
+          "edge_content": "归纳步骤的一部分"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "完成全部 $b_k$ 的构造，得出结论"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 2,
+    "chapter_name": "鸽巢原理",
+    "difficulty": 4,
+    "problem_content": "设 $S$ 是正整数集合 $\\{1, 2, \\ldots, 2025\\}$ 的一个子集，满足：对任意 $a, b \\in S$（允许 $a = b$），$a + b$ 的十进制表示中不出现数字 $9$。求 $|S|$ 的最大值，并证明。",
+    "problem_solution": "记 $T = \\{1, 2, \\ldots, 2025\\}$。\n\n## 一、构造一个满足条件的集合并计算其大小（下界）\n\n构造集合\n$$\nS_0 = \\{x \\in T \\mid \\text{十进制表示中每一位数字 } x_k \\in \\{0,1,2,3,4\\}\\}.\n$$\n\n对于任意 $a, b \\in S_0$，由于它们的每一位数字都不超过 $4$，于是逐位相加时，每一位上的和至多为 $8$，且进位至多为 $1$，因此不会出现某一位数字为 $9$ 的情况。故 $S_0$ 满足题目要求。\n\n下面计算 $|S_0|$。\n\n将 $T$ 中的数按位数分类：\n\n1. **一位数**：\n   \n   一位数且每一位数字在 $\\{0,1,2,3,4\\}$ 中，且为正整数，只能是 $1,2,3,4$，共有\n   $$\n   4 \\text{ 个}.\n   $$\n\n2. **两位数**：\n   \n   形如 $d_1 d_0$，其中\n   $$\n   d_1 \\in \\{1,2,3,4\\}, \\quad d_0 \\in \\{0,1,2,3,4\\}.\n   $$\n   因此共有\n   $$\n   4 \\times 5 = 20 \\text{ 个}.\n   $$\n\n3. **三位数**：\n   \n   形如 $d_2 d_1 d_0$，其中\n   $$\n   d_2 \\in \\{1,2,3,4\\}, \\quad d_1, d_0 \\in \\{0,1,2,3,4\\}.\n   $$\n   因此共有\n   $$\n   4 \\times 5 \\times 5 = 100 \\text{ 个}.\n   $$\n\n4. **四位数**：\n   \n   形如 $d_3 d_2 d_1 d_0$，要求该数不超过 $2025$ 且各位数字在 $\\{0,1,2,3,4\\}$ 中。\n   \n   - 若 $d_3 = 1$，则 $d_2, d_1, d_0 \\in \\{0,1,2,3,4\\}$ 不受进一步限制，共有\n     $$\n     5 \\times 5 \\times 5 = 125 \\text{ 个}.\n     $$\n   - 若 $d_3 = 2$，由于数值不超过 $2025$，千位为 $2$ 时，必须有\n     $$\n     d_2 = 0,\n     $$\n     此时剩余两位构成 $0d_1 d_0$，需要 $d_1 d_0 \\leq 25$ 且 $d_1, d_0 \\in \\{0,1,2,3,4\\}$。\n     \n     满足 $d_1 d_0 \\leq 25$ 的两位数且各位在 $\\{0,1,2,3,4\\}$ 中的情形为：\n     $$\n     d_1 \\in \\{0,1,2\\}, \\quad d_0 \\in \\{0,1,2,3,4\\},\n     $$\n     因此共有\n     $$\n     1 \\times 3 \\times 5 = 15 \\text{ 个}.\n     $$\n\n综上，\n$$\n|S_0| = 4 + 20 + 100 + 125 + 15 = 264.\n$$\n\n因此存在一个满足条件的子集 $S$ 使得 $|S| \\ge 264$，从而 $|S|$ 的最大值至少为 $264$。\n\n## 二、构造分组并证明上界（上界）\n\n下面证明任何满足条件的子集 $S \\subseteq T$ 都有 $|S| \\le 264$。\n\n考虑四位数位表示（在需要时允许前导零），即将 $0$ 到 $9999$ 中的每个数写成四位数的形式 $e_3 e_2 e_1 e_0$，其中 $e_3$ 为千位，$e_0$ 为个位。\n\n对任意给定的四元组 $(d_3,d_2,d_1,d_0)$，其中\n$$\n d_k \\in \\{0,1,2,3,4\\}, \\quad k \\in \\{0,1,2,3\\},\n$$\n定义集合\n$$\nP_{d_3 d_2 d_1 d_0} = \\{ e_3 e_2 e_1 e_0 \\mid e_k = d_k \\text{ 或 } e_k = 9 - d_k,\\ k \\in \\{0,1,2,3\\} \\}.\n$$\n这意味着：$P_{d_3 d_2 d_1 d_0}$ 中的每个四位数，在每一位上要么等于 $d_k$，要么等于 $9 - d_k$。\n\n令\n$$\n\\mathcal{P} = \\{ P_{d_3 d_2 d_1 d_0} \\mid d_k \\in \\{0,1,2,3,4\\},\\ k \\in \\{0,1,2,3\\} \\}.\n$$\n\n### 1. 每个 $P_{d_3 d_2 d_1 d_0}$ 内部的约束\n\n取任意一个固定的集合 $P_{d_3 d_2 d_1 d_0}$，考虑其中任意两个元素 $a = e_3 e_2 e_1 e_0$ 与 $b = f_3 f_2 f_1 f_0$。\n\n对于任意一位 $k$，由定义有\n$$\n e_k, f_k \\in \\{d_k, 9 - d_k\\}.\n$$\n于是每一位上的可能和为：\n\n- $d_k + d_k = 2d_k$，\n- $d_k + (9 - d_k) = 9$，\n- $(9 - d_k) + (9 - d_k) = 18 - 2d_k$。\n\n特别地，当某一位一取 $d_k$、另一取 $9 - d_k$ 时，该位相加得到 $9$。无论是否有进位，$a+b$ 的十进制表示在这一位的和的构成中必然“经过”$9$，从而 $a+b$ 的十进制表示中必定出现数字 $9$（这一点与进位方式无关，因为这一位的局部和就是 $9$）。\n\n因此，对于满足题目条件的集合 $S$，在每个集合 $P_{d_3 d_2 d_1 d_0}$ 中，**至多选取一个元素**。\n\n另一方面，在每个 $P_{d_3 d_2 d_1 d_0}$ 中，十进制数值最小的元素正是 $d_3 d_2 d_1 d_0$ 本身（四位数表示中每一位取较小的 $d_k$ 而非 $9 - d_k$）。若要使某个 $P_{d_3 d_2 d_1 d_0}$ 对应的元素可能属于 $S \\subseteq \\{1,\\dots,2025\\}$，则这个最小元素必须满足\n$$\n d_3 d_2 d_1 d_0 \\leq 2025.\n$$\n\n综上，对于集合 $S$，对每个 $P_{d_3 d_2 d_1 d_0}$：\n\n- 要么 $S$ 与 $P_{d_3 d_2 d_1 d_0}$ 不相交，\n- 要么 $S$ 在 $P_{d_3 d_2 d_1 d_0}$ 中至多包含一个元素，且只能是该集合中最小的数 $d_3 d_2 d_1 d_0$，并且满足 $d_3 d_2 d_1 d_0 \\le 2025$。\n\n### 2. 集合族 $\\mathcal{P}$ 的覆盖性与互不相交性\n\n注意到，对于 $0$ 到 $9999$ 的每个四位数 $e_3 e_2 e_1 e_0$，若我们令\n$$\n d_k = \\min\\{ e_k,\\ 9 - e_k \\} \\in \\{0,1,2,3,4\\},\n$$\n则该数恰属于某个唯一的集合 $P_{d_3 d_2 d_1 d_0}$。因此：\n\n- $\\mathcal{P}$ 中的集合两两互不相交；\n- 它们的并集恰好为\n  $$\n  \\bigcup_{P \\in \\mathcal{P}} P = \\{0,1,2,\\ldots,9999\\}.\n  $$\n\n因此，$\\mathcal{P}$ 为 $\\{0,1,\\dots,9999\\}$ 的一个分划（划分）。\n\n### 3. 与构造的 $S_0$ 的对应关系\n\n对每一个 $P_{d_3 d_2 d_1 d_0}$，若 $S$ 中有元素落在其中，则该元素只能是其中的最小元素 $d_3 d_2 d_1 d_0$，并且需要满足 $d_3 d_2 d_1 d_0 \\le 2025$。但所有满足\n$$\n d_3 d_2 d_1 d_0 \\le 2025, \\quad d_k \\in \\{0,1,2,3,4\\}\n$$\n的四位数（同理也包括较少位数的表示，如前导零的情况）所构成的集合，正是前面构造的 $S_0$。\n\n因此，任一满足条件的子集 $S$ 中的元素，至多就是这些满足限制的“最小代表元”，即\n$$\n S \\subseteq S_0,\n$$\n从而\n$$\n |S| \\le |S_0| = 264.\n$$\n\n## 三、结论\n\n由第一部分构造得到 $|S_0| = 264$，说明最大值至少为 $264$；第二部分证明了任意满足条件的 $S$ 都有 $|S| \\le 264$。两者结合，得到\n$$\n |S|_{\\max} = 264.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在 $T=\\{1,2,\\dots,2025\\}$ 中选子集 $S$，使任意 $a,b\\in S$ 的和的十进制表示中无数字 $9$，求 $|S|_{\\max}$ 并证明。"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "先构造一个满足条件的较大子集给出**下界**，再利用分组思想给出**上界**，两者相遇确定最大值。"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "核心思路",
+          "node_content": "下界：构造 $S_0=\\{x\\in T\\mid$ 十进制每位 $\\in\\{0,1,2,3,4\\}\\}$，并证明其满足条件且计算 $|S_0|$。"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "对于任意 $a,b\\in S_0$，每一位数字均 $\\le 4$，逐位相加每位和 $\\le 8$，进位最多 $1$，故 $a+b$ 的任何一位不可能为 $9$，$S_0$ 符合要求。"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "按位数统计 $S_0$ 的元素个数（考虑到不超过 $2025$ 的约束），得到 $|S_0|=264$，从而 $|S|_{\\max}\\ge 264$。"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "核心思路",
+          "node_content": "上界：用四位数表示（含前导零）把 $0\\sim 9999$ 分组；每组内部因为“某位取补数会出现 $9$”的性质，满足条件的集合在每组中最多取一个最小代表元。"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "定义对每个四元组 $(d_3,d_2,d_1,d_0)$，$d_k\\in\\{0,1,2,3,4\\}$，集合\n$$P_{d_3d_2d_1d_0}=\\{e_3e_2e_1e_0\\mid e_k=d_k \\text{ 或 } 9-d_k\\}.$$ \n在同一 $P_{d_3d_2d_1d_0}$ 内若取两数，在某一位一取 $d_k$、一取 $9-d_k$，该位相加为 $9$，必然在和中出现数字 $9$，故每组至多选一个元素。"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "在 $P_{d_3d_2d_1d_0}$ 中，十进制数值最小的元素是 $d_3d_2d_1d_0$ 本身；若 $S\\subseteq T$ 与该组有交，则只能选这个最小元且需满足 $d_3d_2d_1d_0\\le 2025$。"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "通过 $d_k=\\min\\{e_k,9-e_k\\}$ 将每个四位数 $e_3e_2e_1e_0$ 唯一归入某个 $P_{d_3d_2d_1d_0}$，从而这些 $P$ 两两不交并划分 $\\{0,1,\\dots,9999\\}$。"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "所有满足 $d_k\\in\\{0,1,2,3,4\\}$ 且四位数（含前导零） $d_3d_2d_1d_0\\le 2025$ 的最小代表元集合，恰好就是之前构造的 $S_0$，故对任意满足条件的 $S$ 有 $S\\subseteq S_0$，从而 $|S|\\le |S_0|=264$。"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "最终答案",
+          "node_content": "由下界 $|S|\\ge 264$ 与上界 $|S|\\le 264$，得 $|S|_{\\max}=264$。"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "整体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "给出下界"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "验证构造满足条件"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "计算规模"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N2",
+          "target": "N6",
+          "edge_content": "给出上界"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "分析单组内部限制"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "确定可选代表元"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N9",
+          "edge_content": "证明分组为划分"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N8",
+          "target": "N10",
+          "edge_content": "筛选不超过 $2025$ 的代表元"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "利用划分性质"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N5",
+          "target": "N11",
+          "edge_content": "提供下界"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "提供上界"
+        }
+      ]
+    }
+  }
+]

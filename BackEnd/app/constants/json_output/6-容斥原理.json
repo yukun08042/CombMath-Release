@@ -1,0 +1,687 @@
+[
+  {
+    "chapter_id": 6,
+    "chapter_name": "容斥原理",
+    "difficulty": 3,
+    "problem_content": "求方程 $x_1 + x_2 + x_3 = 40$ 的整数解数目，满足约束条件：\n\n$$6 \\le x_1 \\le 15, \\quad 5 \\le x_2 \\le 20, \\quad 10 \\le x_3 \\le 25.$$",
+    "problem_solution": "令\n\n$$y_1 = x_1 - 6, \\quad y_2 = x_2 - 5, \\quad y_3 = x_3 - 10,$$\n\n则原方程\n\n$$x_1 + x_2 + x_3 = 40$$\n\n转化为\n\n$$y_1 + y_2 + y_3 = 19,$$\n\n其中 $y_1, y_2, y_3 \\ge 0$，并由原来的上界条件得到\n\n$$y_1 \\le 9, \\quad y_2 \\le 15, \\quad y_3 \\le 15.$$\n\n记 $S$ 为方程 $y_1 + y_2 + y_3 = 19$ 的所有非负整数解构成的集合；记 $A_1, A_2, A_3$ 分别为违反上述各自上界条件的解的集合：\n\n- $A_1$: 满足 $y_1 \\ge 10$ 的所有解；\n- $A_2$: 满足 $y_2 \\ge 16$ 的所有解；\n- $A_3$: 满足 $y_3 \\ge 16$ 的所有解。\n\n首先计算 $|S|$。对非负整数解，使用隔板法公式 $\\binom{n+m-1}{m-1}$，其中总和为 $n=19$，变量个数为 $m=3$，得到\n\n$$|S| = \\binom{19+3-1}{3-1} = \\binom{21}{2} = 210.$$\n\n接下来利用容斥原理剔除不满足上界约束的解。\n\n1. 计算 $|A_1|$：\n   若 $y_1 \\ge 10$，令\n   $$z_1 = y_1 - 10 \\ge 0,$$\n   则有\n   $$z_1 + y_2 + y_3 = 19 - 10 = 9.$$\n   该方程的非负整数解个数为\n   $$|A_1| = \\binom{9+3-1}{3-1} = \\binom{11}{2} = 55.$$\n\n2. 计算 $|A_2|$：\n   若 $y_2 \\ge 16$，令\n   $$z_2 = y_2 - 16 \\ge 0,$$\n   则有\n   $$y_1 + z_2 + y_3 = 19 - 16 = 3.$$\n   该方程的非负整数解个数为\n   $$|A_2| = \\binom{3+3-1}{3-1} = \\binom{5}{2} = 10.$$\n\n3. 计算 $|A_3|$：\n   若 $y_3 \\ge 16$，令\n   $$z_3 = y_3 - 16 \\ge 0,$$\n   则有\n   $$y_1 + y_2 + z_3 = 19 - 16 = 3.$$\n   该方程的非负整数解个数为\n   $$|A_3| = \\binom{3+3-1}{3-1} = \\binom{5}{2} = 10.$$\n\n接下来检查各交集：\n\n- 若同时属于 $A_1$ 和 $A_2$，则有 $y_1 \\ge 10$ 且 $y_2 \\ge 16$，此时\n  $$y_1 + y_2 \\ge 10 + 16 = 26 > 19,$$\n  与 $y_1 + y_2 + y_3 = 19$ 矛盾，故 $A_1 \\cap A_2 = \\varnothing$。\n- 同理，$A_1 \\cap A_3$ 中要求 $y_1 + y_3 \\ge 10 + 16 = 26 > 19$，不可能；\n- $A_2 \\cap A_3$ 中要求 $y_2 + y_3 \\ge 16 + 16 = 32 > 19$，也不可能。\n\n因此，所有两两交集以及三重交集均为空集，即\n\n$$|A_i \\cap A_j| = 0, \\quad |A_1 \\cap A_2 \\cap A_3| = 0.$$\n\n由容斥原理可得满足所有上界约束的解的个数为\n\n$$\\begin{aligned}\nN &= |S| - (|A_1| + |A_2| + |A_3|) \\\\\n  &= 210 - (55 + 10 + 10) \\\\\n  &= 135.\n\\end{aligned}$$\n\n因此，原方程在给定约束条件下的整数解数目为\n\n$$135.$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "求方程 $x_1+x_2+x_3=40$ 在 $6\\le x_1\\le 15,\\;5\\le x_2\\le 20,\\;10\\le x_3\\le 25$ 下的整数解个数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "变量平移消去下界，化为非负整数解计数，再用容斥原理处理上界约束"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "令 $y_1=x_1-6,\\;y_2=x_2-5,\\;y_3=x_3-10$，得 $y_1+y_2+y_3=19$, 且 $y_i\\ge0$，并有 $y_1\\le 9,\\;y_2\\le15,\\;y_3\\le15$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "核心思路",
+          "node_content": "先求无上界限制时非负整数解总数 $|S|$（隔板法）"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "方程 $y_1+y_2+y_3=19$ 非负整数解个数 $|S|=\\binom{19+3-1}{3-1}=\\binom{21}{2}=210$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "核心思路",
+          "node_content": "定义违反上界的集合 $A_1,A_2,A_3$，用容斥原理从 $|S|$ 中剔除"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "分支/情况",
+          "node_content": "集合 $A_1$: $y_1\\ge10$，变量代换 $z_1=y_1-10\\ge0$，转化为 $z_1+y_2+y_3=9$，得 $|A_1|=\\binom{9+3-1}{3-1}=55$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "集合 $A_2$: $y_2\\ge16$，变量代换 $z_2=y_2-16\\ge0$，转化为 $y_1+z_2+y_3=3$，得 $|A_2|=\\binom{3+3-1}{3-1}=10$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "分支/情况",
+          "node_content": "集合 $A_3$: $y_3\\ge16$，变量代换 $z_3=y_3-16\\ge0$，转化为 $y_1+y_2+z_3=3$，得 $|A_3|=\\binom{3+3-1}{3-1}=10$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "核心思路",
+          "node_content": "检查集合 $A_1,A_2,A_3$ 的交集是否非空，决定容斥中是否需要加回交集项"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "关键结论",
+          "node_content": "任意两集合交集均空：如 $A_1\\cap A_2$ 要求 $y_1+y_2\\ge10+16=26>19$，与 $y_1+y_2+y_3=19$ 矛盾；同理 $A_1\\cap A_3, A_2\\cap A_3$ 及三重交集均为空"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "关键结论",
+          "node_content": "由容斥原理：满足上界的解数 $N=|S|-(|A_1|+|A_2|+|A_3|)=210-(55+10+10)=135$"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "最终答案",
+          "node_content": "原方程在给定约束下的整数解个数为 $135$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体策略"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "变量平移"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "忽略上界"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "隔板法计数"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N3",
+          "target": "N6",
+          "edge_content": "提取上界条件"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "分支 $A_1$"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N8",
+          "edge_content": "分支 $A_2$"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N6",
+          "target": "N9",
+          "edge_content": "分支 $A_3$"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N10",
+          "edge_content": "汇总违反上界信息"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N8",
+          "target": "N10",
+          "edge_content": "汇总违反上界信息"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "汇总违反上界信息"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "检验交集"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N5",
+          "target": "N12",
+          "edge_content": "带入总数"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N7",
+          "target": "N12",
+          "edge_content": "减去 $|A_1|$"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N8",
+          "target": "N12",
+          "edge_content": "减去 $|A_2|$"
+        },
+        {
+          "edge_id": "E16",
+          "source": "N9",
+          "target": "N12",
+          "edge_content": "减去 $|A_3|$"
+        },
+        {
+          "edge_id": "E17",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "确认无需加回交集项"
+        },
+        {
+          "edge_id": "E18",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "得到最终结果"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 6,
+    "chapter_name": "容斥原理",
+    "difficulty": 3,
+    "problem_content": "在 $1, 2, \\ldots, 10^6$ 这些正整数中，求十进制表示中各位数字之和为 $39$ 的数的个数。",
+    "problem_solution": "首先建立数学模型。注意到 $10^6$ 的各位数字之和为 $1$，不满足条件，因此只需考虑从 $0$ 到 $999{,}999$ 的整数（不足 $6$ 位的数在前面补零）。\n\n设该整数的十进制表示为 $x_1x_2x_3x_4x_5x_6$，其中每个 $x_i$ 为一位数字，则问题等价于求下列方程的整数解个数：\n\n$$x_1 + x_2 + x_3 + x_4 + x_5 + x_6 = 39$$\n\n并满足约束条件：\n\n$$0 \\le x_i \\le 9, \\quad i = 1, 2, \\ldots, 6.$$\n\n---\n\n### 一、构造容斥模型\n\n忽略上界 $9$ 的限制，先考虑非负整数解的集合：\n\n- 记 $S$ 为所有满足 $x_i \\ge 0$ 的解的集合。\n- 对每个 $k = 1,2,\\ldots,6$，记性质 $P_k$ 为“第 $k$ 个变量违规”，即 $x_k \\ge 10$。\n\n我们要求的解数 $N$ 为：满足所有约束，即对任意 $k$ 都不具有性质 $P_k$ 的解的个数。根据容斥原理：\n\n$$\nN = \\sum_{k=0}^6 (-1)^k \\binom{6}{k} \\cdot (\\text{至少 } k \\text{ 个变量违规的解数}).\n$$\n\n实际计算时，相当于对每个选定的违规变量做平移，利用“隔板法”（非负整数解个数为 $\\binom{n+m-1}{m-1}$，其中 $m$ 为变量个数，这里 $m=6$）。\n\n---\n\n### 二、各项的具体计算\n\n1. **无变量违规（总非负整数解，$k=0$）**\n   \n   忽略上界 $9$，只考虑非负整数解：\n   $$x_1 + x_2 + x_3 + x_4 + x_5 + x_6 = 39.$$\n   非负整数解个数为：\n   $$\n   \\binom{39+6-1}{6-1} = \\binom{44}{5} = 1{,}086{,}008.\n   $$\n\n2. **恰有一个变量违规（$k=1$）**\n   \n   选出一个变量 $x_k$ 使其满足 $x_k \\ge 10$，令\n   $$x_k' = x_k - 10 \\ge 0,$$\n   则有\n   $$x_1 + \\cdots + x_k' + \\cdots + x_6 = 39 - 10 = 29.$$\n   对任意选定的一个违规变量，非负整数解个数为\n   $$\\binom{29+6-1}{6-1} = \\binom{34}{5}.$$\n   再乘以选取违规变量的方式数 $\\binom{6}{1}$：\n   $$\n   \\binom{6}{1} \\times \\binom{34}{5} = 6 \\times \\binom{34}{5} = 1{,}669{,}536.\n   $$\n\n3. **恰有两个变量违规（$k=2$）**\n   \n   选出两个变量 $x_{i}, x_{j}$，使它们都满足 $x_{i}, x_{j} \\ge 10$，令\n   $$x_{i}' = x_{i} - 10, \\quad x_{j}' = x_{j} - 10,$$\n   则有\n   $$x_1 + \\cdots + x_{i}' + \\cdots + x_{j}' + \\cdots + x_6 = 39 - 20 = 19.$$\n   对任意选定的一对违规变量，非负整数解个数为\n   $$\\binom{19+6-1}{6-1} = \\binom{24}{5}.$$\n   再乘以选取这两个变量的方式数 $\\binom{6}{2}$：\n   $$\n   \\binom{6}{2} \\times \\binom{24}{5} = 15 \\times \\binom{24}{5} = 637{,}560.\n   $$\n\n4. **恰有三个变量违规（$k=3$）**\n   \n   选出三个变量各自至少为 $10$，总计至少占用 $30$，令相应平移后得到\n   $$x_1 + \\cdots + x_6 = 39 - 30 = 9.$$\n   对任意选定的三元组，非负整数解个数为\n   $$\\binom{9+6-1}{6-1} = \\binom{14}{5}.$$\n   再乘以选取这三个变量的方式数 $\\binom{6}{3}$：\n   $$\n   \\binom{6}{3} \\times \\binom{14}{5} = 20 \\times \\binom{14}{5} = 40{,}040.\n   $$\n\n5. **四个及以上变量违规（$k \\ge 4$）**\n   \n   若至少有四个变量各自 $\\ge 10$，则它们的和至少为 $40$，但总和只有 $39$，因此无非负整数解：\n   $$39 - 40 < 0,$$\n   故对应项均为 $0$。\n\n---\n\n### 三、代入容斥公式\n\n综合上述各项，按容斥原理交错相加：\n\n$$\n\\begin{aligned}\nN &= \\binom{44}{5} - \\binom{6}{1}\\binom{34}{5} + \\binom{6}{2}\\binom{24}{5} - \\binom{6}{3}\\binom{14}{5} \\\\\n  &= 1{,}086{,}008 - 1{,}669{,}536 + 637{,}560 - 40{,}040 \\\\\n  &= 13{,}992.\n\\end{aligned}\n$$\n\n因此，满足条件的正整数的个数为：\n\n$$13{,}992.$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在 $1\\sim10^6$ 中，求十进制各位数字之和为 $39$ 的数的个数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "转化为 $6$ 位数（不足补零），建立方程并用容斥 + 隔板法计数"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "$10^6$ 的各位和为 $1\\neq39$，只需统计 $0\\sim999,999$ 的 $6$ 位数（含前导零）"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "设数为 $x_1x_2x_3x_4x_5x_6$，满足\n$$x_1+\\cdots+x_6=39,\\quad 0\\le x_i\\le 9$$"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "忽略上界 $9$ 得所有非负整数解集合 $S$，再用容斥排除“某些 $x_k\\ge 10$” 的解"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "核心思路",
+          "node_content": "定义性质 $P_k: x_k\\ge10$，需要的个数 $N$ 为对所有 $k$ 均不具 $P_k$ 的解的个数"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "核心思路",
+          "node_content": "按违规变量个数 $k$ 分组，用容斥：\n$$N=\\sum_{k=0}^6(-1)^k\\binom{6}{k}\\cdot(\\text{至少 $k$ 个变量违规的解数})$$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "情况 $k=0$：无变量违规\n原方程非负整数解个数\n$$\\binom{39+6-1}{6-1}=\\binom{44}{5}$$"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "分支/情况",
+          "node_content": "情况 $k=1$：恰有一个变量 $\\ge 10$\n平移 $x_k'=x_k-10$，方程变为和为 $29$：\n$$\\binom{29+6-1}{5}=\\binom{34}{5}$$\n乘以选违规变量方式 $\\binom{6}{1}$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "分支/情况",
+          "node_content": "情况 $k=2$：恰有两个变量 $\\ge 10$\n各减 $10$ 后和为 $19$：\n$$\\binom{19+6-1}{5}=\\binom{24}{5}$$\n乘以 $\\binom{6}{2}$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "分支/情况",
+          "node_content": "情况 $k=3$：恰有三个变量 $\\ge 10$\n各减 $10$ 后和为 $9$：\n$$\\binom{9+6-1}{5}=\\binom{14}{5}$$\n乘以 $\\binom{6}{3}$"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "分支/情况",
+          "node_content": "情况 $k\\ge4$：至少四个变量 $\\ge 10$\n和至少 $40>39$，无解，对应项为 $0$"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "关键结论",
+          "node_content": "汇总容斥各项：\n$$N=\\binom{44}{5}-\\binom{6}{1}\\binom{34}{5}+\\binom{6}{2}\\binom{24}{5}-\\binom{6}{3}\\binom{14}{5}$$"
+        },
+        {
+          "node_id": "N14",
+          "node_type": "最终答案",
+          "node_content": "计算得 $N=13\\,992$，即共有 $13\\,992$ 个满足条件的正整数"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "整体建模"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "剔除 $10^6$，补零化为 $6$ 位数"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "写出方程与约束"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "引入集合 $S$"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "定义违规性质"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "用容斥按违规个数计数"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "分支：$k=0$"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N9",
+          "edge_content": "分支：$k=1$"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N7",
+          "target": "N10",
+          "edge_content": "分支：$k=2$"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N7",
+          "target": "N11",
+          "edge_content": "分支：$k=3$"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N7",
+          "target": "N12",
+          "edge_content": "分支：$k\\ge4$"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N8",
+          "target": "N13",
+          "edge_content": "参与容斥求和"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N9",
+          "target": "N13",
+          "edge_content": "参与容斥求和"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N10",
+          "target": "N13",
+          "edge_content": "参与容斥求和"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N11",
+          "target": "N13",
+          "edge_content": "参与容斥求和"
+        },
+        {
+          "edge_id": "E16",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "对应项为 $0$ 加入"
+        },
+        {
+          "edge_id": "E17",
+          "source": "N13",
+          "target": "N14",
+          "edge_content": "计算得最终结果"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 6,
+    "chapter_name": "容斥原理",
+    "difficulty": 2,
+    "problem_content": "在 $1, 2, 3, 4, 5, 6, 7$ 的全排列中，至少有 $5$ 个数不在其原本位置上，求满足要求的排列数目。",
+    "problem_solution": "设 $S$ 为所有排列的集合，则 $|S| = 7!$。\n\n题目要求“至少 $5$ 个数不在其原本位置上”，等价于“至多有 $2$ 个数在原本位置上”。因此需要计算**恰有 $0$ 个、$1$ 个、$2$ 个数在原位**的排列数之和。\n\n引入错排数的记号与公式：设 $D_n$ 表示 $n$ 个元素的全错排数（即没有任何一个元素在原位的排列数），则有\n$$\nD_n = n! \\sum_{k=0}^n \\frac{(-1)^k}{k!}.\n$$\n\n本题中需要用到的错排数为（可由上述递推或公式计算得到）：\n\n$$\n\\begin{aligned}\nD_5 &= 5!\\left( \\frac{1}{2} - \\frac{1}{6} + \\frac{1}{24} - \\frac{1}{120} \\right) = 60 - 20 + 5 - 1 = 44, \\\\\nD_6 &= 6D_5 + (-1)^6 = 6 \\times 44 + 1 = 265, \\\\\nD_7 &= 7D_6 + (-1)^7 = 7 \\times 265 - 1 = 1854.\n\\end{aligned}\n$$\n\n对“在原位上的元素个数”分类讨论：\n\n1. **恰好 $0$ 个数在原位（全错排）**  \n   即 $7$ 个数全部不在原位，方案数等于 $D_7$：\n   $$\n   N_0 = \\binom{7}{0} \\times D_7 = 1 \\times 1854 = 1854.\n   $$\n\n2. **恰好 $1$ 个数在原位**  \n   先从 $7$ 个位置中选出 $1$ 个固定在原位，其余 $6$ 个数必须构成一个对这 $6$ 个位置的全错排，方案数为：\n   $$\n   N_1 = \\binom{7}{1} \\times D_6 = 7 \\times 265 = 1855.\n   $$\n\n3. **恰好 $2$ 个数在原位**  \n   先从 $7$ 个位置中选出 $2$ 个固定在原位，其余 $5$ 个数在剩余 $5$ 个位置上构成全错排，方案数为：\n   $$\n   N_2 = \\binom{7}{2} \\times D_5 = \\frac{7 \\times 6}{2} \\times 44 = 21 \\times 44 = 924.\n   $$\n\n将三种情况的结果相加，得到满足条件的排列总数：\n\n$$\nN = N_0 + N_1 + N_2 = 1854 + 1855 + 924 = 4633.\n$$\n\n因此，至少有 $5$ 个数不在其原本位置上的排列共有 $4633$ 个。",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "在 $1\\sim 7$ 的全排列中，求“至少有 $5$ 个数不在原位”的排列数"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "把“至少 $5$ 个不在原位”转化为“至多 $2$ 个在原位”，按在原位元素个数分类：$0,1,2$"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "核心思路",
+          "node_content": "引入错排数 $D_n$（全错排）：$D_n=n!\\sum\\limits_{k=0}^n \\dfrac{(-1)^k}{k!}$，并得到 $D_5,D_6,D_7$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "分支/情况",
+          "node_content": "情况一：恰有 $0$ 个数在原位（全错排）"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "关键结论",
+          "node_content": "$7$ 个数全部不在原位，方案数为 $N_0 = \\binom{7}{0}D_7 = D_7 = 1854$"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "分支/情况",
+          "node_content": "情况二：恰有 $1$ 个数在原位"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "选 $1$ 个位置固定，其余 $6$ 个数在剩余 $6$ 个位置全错排：$N_1 = \\binom{7}{1}D_6 = 7\\times 265 = 1855$"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "分支/情况",
+          "node_content": "情况三：恰有 $2$ 个数在原位"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "关键结论",
+          "node_content": "选 $2$ 个位置固定，其余 $5$ 个数在剩余 $5$ 个位置全错排：$N_2 = \\binom{7}{2}D_5 = 21\\times 44 = 924$"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "汇总三种情况：$N = N_0 + N_1 + N_2 = 1854 + 1855 + 924$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "最终答案",
+          "node_content": "满足“至少 $5$ 个数不在原位”的排列共有 $4633$ 个"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "条件转化与分类思路"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "需要工具：错排数"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N2",
+          "target": "N4",
+          "edge_content": "分类：$0$ 个在原位"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N2",
+          "target": "N6",
+          "edge_content": "分类：$1$ 个在原位"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N2",
+          "target": "N8",
+          "edge_content": "分类：$2$ 个在原位"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N3",
+          "target": "N5",
+          "edge_content": "用 $D_7$ 求 $N_0$"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "全错排计数"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N3",
+          "target": "N7",
+          "edge_content": "用 $D_6$ 求 $N_1$"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "固定 1 个位置"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N3",
+          "target": "N9",
+          "edge_content": "用 $D_5$ 求 $N_2$"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N8",
+          "target": "N9",
+          "edge_content": "固定 2 个位置"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N5",
+          "target": "N10",
+          "edge_content": "纳入总数"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N7",
+          "target": "N10",
+          "edge_content": "纳入总数"
+        },
+        {
+          "edge_id": "E14",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "纳入总数"
+        },
+        {
+          "edge_id": "E15",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "得出最终结果"
+        }
+      ]
+    }
+  },
+  {
+    "chapter_id": 6,
+    "chapter_name": "容斥原理",
+    "difficulty": 3,
+    "problem_content": "在集合 $\\{1, 2, \\ldots, n\\}$ 的全排列中，禁止出现子串 $12, 23, 34, \\ldots, (n-1)n, n1$，求满足要求的排列数目。",
+    "problem_solution": "设 $S$ 为 $\\{1, 2, \\ldots, n\\}$ 的所有全排列的集合，则 $|S| = n!$。\n\n对每一个被禁止的相邻子串定义一个性质：\n\n- 对于 $1 \\le i \\le n-1$，性质 $P_i$：排列中出现子串 $i(i+1)$；\n- 性质 $P_n$：排列中出现子串 $n1$。\n\n问题转化为：在集合 $S$ 中，计算不满足任何性质 $P_i$ 的排列数。根据容斥原理，所求排列数为\n$$\nN = \\sum_{k=0}^n (-1)^k S_k,\n$$\n其中 $S_k$ 表示在排列中恰好选取 $k$ 个性质（即出现 $k$ 个被禁止的相邻子串）时，对所有这类性质组合的排列数之和。\n\n---\n\n### 1. 对 $S_k$ 的分析\n\n当在排列中强制满足 $k$ 个给定的相邻关系（即将这 $k$ 个对应的子串“粘合”为单个整体）时，只要这 $k$ 个关系不构成回路，这些相邻关系将 $n$ 个元素“粘合”为 $n-k$ 个连通块；在这种情况下，将这 $n-k$ 个连通块作线性排列，排列数为 $(n-k)!$。\n\n接下来需要确定从 $n$ 个可能的相邻关系中选出 $k$ 个的方式数，并判断是否可能构成回路。\n\n注意：\n\n- 在长度为 $n$ 的线性排列中，最多只有 $n-1$ 个相邻位置，因此不可能同时满足全部 $n$ 个相邻关系 $12, 23, \\ldots, (n-1)n, n1$；全部满足这 $n$ 个关系将形成一个长度为 $n$ 的环，这与线性排列不相容。\n\n因此：\n\n- 当 $0 \\le k \\le n-1$ 时，任意选取 $k$ 个相邻关系都不可能形成包含全部元素的回路，从而可视为将 $n$ 个元素粘合为 $n-k$ 个连通块。\n  - 选取 $k$ 个关系的方式数为 $\\binom{n}{k}$；\n  - 在每一种选取下，对应的排列数为 $(n-k)!$；\n  - 故\n    $$\n    S_k = \\binom{n}{k} (n-k)!, \\quad 0 \\le k \\le n-1.\n    $$\n- 当 $k = n$ 时，要求同时满足全部 $n$ 个相邻关系，必然形成一个环，这在线性排列中是不可能实现的，因此\n  $$\n  S_n = 0.\n  $$\n\n---\n\n### 2. 代入容斥公式\n\n由上式代入容斥公式，得到\n$$\n\\begin{aligned}\nN &= \\sum_{k=0}^{n-1} (-1)^k \\binom{n}{k} (n-k)! \\\\\n  &= \\sum_{k=0}^{n-1} (-1)^k \\frac{n!}{k!(n-k)!} (n-k)! \\\\\n  &= \\sum_{k=0}^{n-1} (-1)^k \\frac{n!}{k!} \\\\\n  &= n! \\sum_{k=0}^{n-1} \\frac{(-1)^k}{k!}.\n\\end{aligned}\n$$\n\n因此，禁止出现子串 $12, 23, 34, \\ldots, (n-1)n, n1$ 的全排列数目为\n$$\nN = n! \\sum_{k=0}^{n-1} \\frac{(-1)^k}{k!}.\n$$",
+    "problem_mindmap": {
+      "nodes": [
+        {
+          "node_id": "N1",
+          "node_type": "问题核心",
+          "node_content": "求在全排列中**禁止出现**子串 $12,23,\\dots,(n-1)n,n1$ 的排列数 $N$"
+        },
+        {
+          "node_id": "N2",
+          "node_type": "核心思路",
+          "node_content": "把每个被禁止子串看作一个“性质” $P_i$，用**容斥原理**计数：不满足任何 $P_i$ 的排列数"
+        },
+        {
+          "node_id": "N3",
+          "node_type": "关键结论",
+          "node_content": "设 $S$ 为所有全排列，$|S|=n!$，性质：$P_i:$ 出现子串 $i(i+1)$（$1\\le i\\le n-1$），$P_n:$ 出现子串 $n1$"
+        },
+        {
+          "node_id": "N4",
+          "node_type": "关键结论",
+          "node_content": "容斥表达式：$N=\\sum_{k=0}^{n}(-1)^k S_k$，其中 $S_k$ 为“恰好选取 $k$ 个性质时，对所有性质组合的排列数之和”"
+        },
+        {
+          "node_id": "N5",
+          "node_type": "核心思路",
+          "node_content": "分析 $S_k$：强制满足 $k$ 个相邻关系，相当于把对应子串“粘合”为块，研究得到的连通块数和能否构成线性排列"
+        },
+        {
+          "node_id": "N6",
+          "node_type": "分支/情况",
+          "node_content": "情况一：$0\\le k\\le n-1$，选取任意 $k$ 个相邻关系"
+        },
+        {
+          "node_id": "N7",
+          "node_type": "关键结论",
+          "node_content": "当 $0\\le k\\le n-1$ 时，最多 $n-1$ 个相邻位置，不会形成包含全部元素的回路，因此把 $n$ 个元素“粘合”为 $n-k$ 个连通块，可线性排列"
+        },
+        {
+          "node_id": "N8",
+          "node_type": "关键结论",
+          "node_content": "选取 $k$ 个相邻关系的方式数为 $\\binom{n}{k}$，每种选取对应 $(n-k)!$ 种排列，故 $S_k=\\binom{n}{k}(n-k)!$（$0\\le k\\le n-1$）"
+        },
+        {
+          "node_id": "N9",
+          "node_type": "分支/情况",
+          "node_content": "情况二：$k=n$，同时满足全部 $n$ 个相邻关系"
+        },
+        {
+          "node_id": "N10",
+          "node_type": "关键结论",
+          "node_content": "当 $k=n$ 时，$12,23,\\dots,(n-1)n,n1$ 构成一整圈，只能形成环而不能成为长度为 $n$ 的线性排列，故 $S_n=0$"
+        },
+        {
+          "node_id": "N11",
+          "node_type": "核心思路",
+          "node_content": "把 $S_k$ 的结果代回容斥式，对求和进行化简"
+        },
+        {
+          "node_id": "N12",
+          "node_type": "关键结论",
+          "node_content": "$N=\\sum_{k=0}^{n-1}(-1)^k\\binom{n}{k}(n-k)!=\\sum_{k=0}^{n-1}(-1)^k\\dfrac{n!}{k!}=n!\\sum_{k=0}^{n-1}\\dfrac{(-1)^k}{k!}$"
+        },
+        {
+          "node_id": "N13",
+          "node_type": "最终答案",
+          "node_content": "所求排列数：$\\displaystyle N=n!\\sum_{k=0}^{n-1}\\frac{(-1)^k}{k!}$"
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "E1",
+          "source": "N1",
+          "target": "N2",
+          "edge_content": "确定总体计数方法"
+        },
+        {
+          "edge_id": "E2",
+          "source": "N2",
+          "target": "N3",
+          "edge_content": "定义性质与全集"
+        },
+        {
+          "edge_id": "E3",
+          "source": "N3",
+          "target": "N4",
+          "edge_content": "写出容斥形式"
+        },
+        {
+          "edge_id": "E4",
+          "source": "N4",
+          "target": "N5",
+          "edge_content": "转向分析 $S_k$"
+        },
+        {
+          "edge_id": "E5",
+          "source": "N5",
+          "target": "N6",
+          "edge_content": "对 $k$ 分类讨论一"
+        },
+        {
+          "edge_id": "E6",
+          "source": "N5",
+          "target": "N9",
+          "edge_content": "对 $k$ 分类讨论二"
+        },
+        {
+          "edge_id": "E7",
+          "source": "N6",
+          "target": "N7",
+          "edge_content": "分析结构"
+        },
+        {
+          "edge_id": "E8",
+          "source": "N7",
+          "target": "N8",
+          "edge_content": "得到 $S_k$ 公式"
+        },
+        {
+          "edge_id": "E9",
+          "source": "N9",
+          "target": "N10",
+          "edge_content": "分析不可能性"
+        },
+        {
+          "edge_id": "E10",
+          "source": "N8",
+          "target": "N11",
+          "edge_content": "带入容斥"
+        },
+        {
+          "edge_id": "E11",
+          "source": "N10",
+          "target": "N11",
+          "edge_content": "包含 $S_n=0$ 情况"
+        },
+        {
+          "edge_id": "E12",
+          "source": "N11",
+          "target": "N12",
+          "edge_content": "代入并化简"
+        },
+        {
+          "edge_id": "E13",
+          "source": "N12",
+          "target": "N13",
+          "edge_content": "给出结果"
+        }
+      ]
+    }
+  }
+]

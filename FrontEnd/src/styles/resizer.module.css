@@ -1,0 +1,8 @@
+.resizer {
+  transition: background-color 0.2s ease; /* 过渡效果，持续0.2秒，使用ease时间曲线 */
+  transition-delay: 0.1s; /* 延迟0.1秒开始变化 */
+  &:active,
+  &:hover {
+    background: #c1c3c5b4;
+  }
+}

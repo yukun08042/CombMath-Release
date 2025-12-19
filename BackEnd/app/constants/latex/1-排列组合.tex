@@ -1,0 +1,167 @@
+\question 将 $n$ 个相同的小球放入 $r$ 个不同的盒子中，每盒中至少 $k$ 个球 ($n \geq rk$)， 求方案数。
+
+\begin{enumerate}
+    \item 先在每个盒子中放入 $k$ 个球，剩余 $n-rk$ 个球
+    \item 再将 $n-rk$ 个球放入 $r-1$ 个盒子，等价于从 $n-rk+r-1$ 个位置中选出 $r-1$ 个
+\end{enumerate}
+
+\begin{solution}
+    $C_{n-rk+r-1}^{r-1}$
+\end{solution}
+
+
+\question 求从 1 到 100000 的整数的十进制表示中，数字 0 出现的总次数。
+
+考虑一个第 i 位（$i\neq n$）是 0 的 n 位数，最高位有9种取值，其余位置分别有10种取值，共计 $9\cdot10^{n-2}$ 种可能。计算 1 位数到 5 位数的所有可能：
+$\sum_{n=1}^{5}{9\cdot10^{n-2}\cdot(n-1)}=0+9+180+2700+36000=38889$
+再考虑 100000 所包含的 0，因此总次数为：
+
+\begin{solution}
+    38894
+\end{solution}
+
+\question m 个男生和 n 个女生排成一行（m, n 均为正整数），求以下情况方案数：
+\begin{enumerate}
+    \item 任何两个男生不相邻（m ≤ n + 1）：
+        先对女生进行全排列，然后选择 m 个位置插入男生，最后在男生内部进行全排列：
+        \begin{solution}
+            $n! \cdot \binom{n+1}{m} \cdot m! = \frac{n!(n+1)!}{(n+1-m)!} \quad (m \leq n+1)$
+        \end{solution}
+    \item n 个女生形成一个整体（即任何两个女生之间没有男生）：
+        先将所有女生当作整体，对 m+1 个对象进行全排列，然后在女生内部进行全排列：
+        \begin{solution}
+            $(m+1)!\cdot n!$
+        \end{solution}
+    \item 男生 A 和女生 B 不相邻：
+        先计算所有人的全排列，然后扣除男生 A 和女生 B 相邻的次数：
+        \begin{solution}
+            $(m+n)!-2\cdot(m+n-1)!=(m+n-2)\cdot(m+n-1)!$
+        \end{solution}
+\end{enumerate}
+
+\question 设 A = {(a, b)|a, b ∈ Z, 0 ≤ a ≤ 9, 0 ≤ b ≤ 7}.
+\begin{enumerate}
+    \item 求 xOy 平面上以 A 中的点为四个顶点、四边与坐标轴平行的长方形数目（包括正方形）：
+        分别确定两个横坐标、两个纵坐标：
+        \begin{solution}
+            $C(10,2)\cdot C(8,2)=1260$
+        \end{solution}
+    \item 求 xOy 平面上以 A 中的点为四个顶点、四边与坐标轴平行的正方形数目：
+        确定左下角的顶点坐标和正方形的边长 $k$，即可确定正方形的位置。设左下为 $(a,b)$，右上为 $(a+k,b+k)$，限制 $a+k\leq9,b+k\leq7$：
+        \begin{solution}
+            $\sum_{k=1}^7(10-k)(8-k)=196$
+        \end{solution}
+\end{enumerate}
+
+\question 由 n 个 0 和 n 个 1 构成的 2n 位二进制串，要求任意前 k 位中 0 的数目不少于 1 的数目(1 ≤ k ≤ 2n)，求满足要求的二进制串的数目。\par
+即卡特兰数，可以理解为，设进栈为1，出栈为0，计算进出栈序列的所有可能性。
+\begin{enumerate}
+    \item 先计算n个进栈位置：在 2n 个位置中选择 n 个作为进栈，$C_{2n}^n$
+    \item 再减去不符合要求的部分：出栈操作多于进栈操作，$C_{2n}^{n+1}$
+\end{enumerate}
+\begin{solution}
+    $C_{2n}^n-C_{2n}^{n+1}=\frac{1}{n+1}\cdot C_{2n}^n$
+\end{solution}
+
+\question 设 $a_i$ 是一长度为 60 的正整数列 $(1 \leq i \leq 60)$，其中 $a_1 = 1$, $a_{60} = 20^{20}$，并且数列中每一项都是其后面一项的约数。
+对 $a_{60}$ 进行质因数分解，$a_{60}=2^{40}\cdot 5^{20}$；因此， $a_i$ 可以表示为 $2^{x_i}\cdot 5^{y_i}, (0\leq x_i\leq40,0\leq y_i\leq20)$，其中 $a_1=2^0\cdot 5^0$
+\begin{enumerate}
+    \item 求满足要求的数列 $a_i$ 的数目；\par
+        即 ${x_i}$ 和 ${y_i}$ 非减。对于每个 $i$，$\Delta x_i$ 和 $\Delta y_i$ 都可以是0或1，转化为隔板问题。${x_i}$ 方案数为 $C(59+40-1,40)=C(98,40)$， ${y_i}$ 方案数为 $C(59+20-1,20)=C(78,20)$，两者独立，因此：
+        \begin{solution}
+            $C(98,40)\cdot C(78,20)$
+        \end{solution}
+    \item 若进一步要求 $a_i$ 严格递增，求满足条件的序列数目。\par
+        即对于每个 $i$，${x_i}$ 和 ${y_i}$ 至少有一个递增。观察可知，${x_i}$ 和 ${y_i}$ 总计只能增大最多 60 次，而 $a_1$ 到 $a_{60}$ 需要递增 59 次，因此，有且仅有 1 个位置存在 $x_i+{y_i}=x_{i-1}+y_{i-1}+2$，其余位置都有 $x_i=x_{i-1}+1, y_i=y_{i-1}$ 或 $x_i=x_{i-1}, y_i=y_{i-1}+1$。分类讨论：
+        \begin{enumerate}
+            \item 存在一个 $i>1$，有 $x_i=x_{i-1}+2$\par
+            选择 $i$ 令 $\Delta x_i=2$，有 59 种方案；再在剩余 58 次递增中，选择 40-2=38 个 $\Delta x_i=1$ 的位置，共有 $59\cdot C(58,38)$ 种方案
+            \item 存在一个 $i>1$，有 $y_i=y_{i-1}+2$\par
+            同上，先选择 $i$ 令 $\Delta y_i=2$；再在剩余 58 次递增中，选择 20-2=18 个 $\Delta y_i=1$ 的位置，共有 $59\cdot C(58,18)$ 种方案
+            \item 存在一个 $i>1$，有 $x_i=x_{i-1}+1, y_i=y_{i-1}+1$\par
+            先选择 $i$ 令 $\Delta x_i=\Delta y_i=1$；再在剩余 58 次递增中，选择 40-1=39 个 $\Delta x_i=1$ 的位置，其余即为 $\Delta y_i=1$ 的位置，共有  $59\cdot C(58,39)$ 种方案
+        \end{enumerate}
+        \begin{solution}
+            $59\cdot(C(58,20)+C(58,18)+C(58,19))$
+        \end{solution}
+\end{enumerate}
+
+\question 完全二分图 $K_{n,n}$ 指的是一个简单无向图 $G = (V, E)$，其中点集 $V = {1, 2, ... , 2n}$，边集 $E = {(i, n + j)|1 ≤ i, j ≤ n}$。图上的简单回路指的是不含重复顶点或重复边的回路。设正整数 k 满足 $1 \leq k \leq n$，求 $K_{n,n}$ 上长度为 $2k$ 的简单回路的数目。
+即，在左侧 $V1$ 和右侧 $V2$ 之间来回 $k$ 次。
+\begin{enumerate}
+    \item 选点：左右两侧各选 $k$ 个点，$C(n,k)\cdot C(n,k)$
+    \item 确定排列顺序：任选一个初始的左侧顶点，则剩余的左侧顶点有 $(k-1)!$ 中方案，右侧顶点有 $k!$ 种方案
+    \item 每个回路被计算了 2 次，由于不考虑方向，需要再除以 2
+\end{enumerate}
+\begin{solution}
+    $k>1$ 时，$C(n,k) \cdot C(n,k) \cdot k! \cdot (k-1)!$ / 2 \par
+    $k=1$ 时，0 （回路不存在）
+\end{solution}
+
+\question 直线分圆是一个非常有趣的组合数学问题，考虑下列直线分圆问题：
+\begin{enumerate}
+    \item 在平面上作一个圆和 n 条直线，求这些直线最多将圆分为多少个部分；\par
+        设 n 条直线将圆分成 $f(n)$ 份，且第 n 条直线可以穿过之前的 n-1 条直线，则有递推关系：$f(n)=f(n-1)+n$
+        \begin{solution}
+            $f(n)=1+\frac{n\cdot(n+1)}{2}=\frac{n^2+n+2}{2}$
+        \end{solution}
+    \item 在平面上作一个圆并在圆周上任取 n 个点，这些点两两连线得到一系列圆内的线段，假设任意三条线段不共点，求这些线段在圆内的交点数目；\par
+        确定四个不同的点，就可以确定两条线段及它们的交点，因此交点数目等于从 n 个点中选择 4 个点的组合数：
+        \begin{solution}
+            $C(n,4)=\frac{n(n-1)(n-2)(n-3)}{24}$
+        \end{solution}
+    \item 在第 (2) 问的基础上，考察所有三边均在这些线段上的三角形，这些三角形可能有 0 个、1 个、2 个或 3 个顶点在圆上，求每种三角形的数目；
+        \par分类讨论：
+        \begin{enumerate}
+            \item \textbf{3 个顶点在圆上}：从 n 个点中选择 3 个，总计 C(n,43 个
+            \item \textbf{2 个顶点在圆上}：从圆上任选 4 个点，全连接，形成 4 个符合要求的三角形，总计 $4\cdot C(n,4)$ 个
+            \item \textbf{1 个顶点在圆上}：从圆上任选 5 个点，全连接，形成 5 个符合要求的三角形，总计 $5\cdot C(n,5)$ 个
+            \item \textbf{0 个顶点在圆上}：从圆上任选 6 个点，对着相连，形成 1 个符合要求的三角形，总计 $C(n,6)$ 个
+        \end{enumerate}
+        \begin{solution}
+            $C(n,6)+5\cdot C(n,5)+4\cdot C(n,4)+C(n,3)$
+        \end{solution}
+    \item 在第 (2) 问的基础上，求这些线段将圆分为多少个部分.\par
+        欧拉定理：对于一个连通的平面图，记 $V$ 为顶点数，$E$ 为边数，$F$ 为区域数，有 $V-E+F=2$。在本题中，
+        \begin{enumerate}
+            \item 顶点包括圆周上的 $n$ 个点和线段的交点，共计 $V=n+C(n,4)$；\par
+            \item 边包括圆内的线段和圆弧，共计 $E=n+C(n,2)+2\cdot C(n,4)$。\par
+            \item 利用欧拉公式，可以求出面数 $F$：$$F=1-V+E=1+C(n,2)+C(n,4)$$
+        \end{enumerate}
+\end{enumerate}
+
+\question 考虑平面上的一个任意凸 $n$ 边形 $(n\geq6)$：
+    \begin{enumerate}
+        \item 作 2 条不同的对角线，且它们仅有一个在多边形顶点处的公共点，求方案数；\par
+            \begin{enumerate}
+                \item 选择一个顶点，共计 $n$ 种方案
+                \item 在其余 $n-3$ 个非相邻顶点中选择 2 个，共计 $C(n-3,2)$
+            \end{enumerate}
+            \begin{solution}
+                $n\cdot C(n-3,2) = \frac{n(n-3)(n-4)}{2}$
+            \end{solution}
+        \item 作 2 条不同的对角线，且它们无公共点，求方案数。\par
+            先计算所有对角线的方案数，再扣除有公共点的次数：
+            \begin{enumerate}
+                \item 对角线总数为 $n(n-3)/2$，任选两条共计 $C(n(n-3)/2, 2)$ 种
+                \item 两条对角线在顶点处相交，即 1. 的情况，共计 $n\cdot C(n-3,2)$ 种
+                \item 两条对角线在多边形内相交：任选 4 个顶点，交叉相连，形成 1 个符合要求的交点，共计 $C(n,4)$ 种
+            \end{enumerate}
+            \begin{solution}
+                $C(\frac{n(n-3)}{2}, 2)-n\cdot C(n-3,2)-C(n,4)=\frac{n(n-3)(n-4)(n-5)}{12}$
+            \end{solution}
+    \end{enumerate}
+
+\question 用字符 x, y, z 组成长度为 n 的字符串，使得 x, y, z 都出现奇数次 (n ≥ 3 且 n 为奇数)，求方案数。\par
+    使用容斥原理，先计算有字符出现偶数次的方案数。
+    \begin{enumerate}
+        \item \textbf{1个字符出现偶数次.} 设 $x$ 出现 $k$ 次（$k$为偶数）：
+            $$\sum_{k=0}^{n-1}C(n,k)\cdot2^{n-k}=\frac{1}{2}(3^n+1)$$
+        \item \textbf{2个字符出现偶数次.} 设 $x$ 出现 $k_1$ 次，$y$ 出现 $k_2$ 次（$k$为偶数）：
+            $$\sum_{k_1=0}^{n-1}C(n,k_1)\sum_{k_2=0}^{n-k_1-1}C(n-k_1,k_2)=\frac{1}{4}(3^n+1)$$
+        \item \textbf{3个字符出现偶数次.} 由于 $n$ 为奇数，因此不可能存在。
+    \end{enumerate}
+        综上，有字符出现偶数次的方案数为 $3\cdot\frac{1}{2}(3^n+1)+2\cdot\frac{1}{4}(3^n+1)$。
+    \begin{solution}
+        $3^n-\frac{3}{4}(3^n+1)=\frac{1}{4}(3^n-3)$
+    \end{solution}
