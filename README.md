@@ -15,8 +15,8 @@
 
 ```text
 ComboLink/
-├── BackEnd/                    # 后端仓库（Python）
-├── FrontEnd/                   # 前端仓库（Vue/React）
+├── BackEnd/                    # 后端仓库（FastAPI）
+├── FrontEnd/                   # 前端仓库（React）
 └── credentials.yaml.example    # 配置文件
 ```
 
@@ -71,8 +71,8 @@ cp credentials.yaml.example credentials.yaml
 
 ## 🛠️ 技术栈
 
-- **后端**: Python (FastAPI / SQLModel) + LLM (Chain of Thought 提示词工程)
-- **前端**: Node.js + Yarn + 思维导图渲染引擎
+- **后端**: FastAPI / SQLModel + LLM (Chain of Thought 提示词工程)
+- **前端**: React Vite + Yarn + 思维导图渲染引擎
 - **数据流**: LaTeX 题目 -> JSON 结构化 -> SQLModel 数据库存储 -> 前端可视化
 
 ## 💡 设计理念
